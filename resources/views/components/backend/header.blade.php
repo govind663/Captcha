@@ -52,11 +52,11 @@
                 </span>
                 <span class="user-content">
                     <span class="user-name">{{ Auth::user()->name }}</span>
-                    @if (Auth::user()->user_type = '1')
+                    @if (Auth::user()->user_type == '1')
                     <span class="user-name">Super Admin</span>
-                    @elseif (Auth::user()->user_type = '2')
+                    @elseif (Auth::user()->user_type == '2')
                     <span class="user-name">Admin</span>
-                    @elseif (Auth::user()->user_type = '3')
+                    @elseif (Auth::user()->user_type == '3')
                     <span class="user-name">User</span>
                     @endif
 

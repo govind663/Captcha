@@ -45,4 +45,5 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
     Route::get('/change-password', [HomeController::class, 'changePassword'])->name('change-password');
     Route::post('/change-password', [HomeController::class, 'updatePassword'])->name('update-password');
 
+
 });
