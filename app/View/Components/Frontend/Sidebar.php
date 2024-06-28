@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Backend;
+namespace App\View\Components\Frontend;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -24,6 +24,7 @@ class Sidebar extends Component
         // === which tab is currentlt Active or not in CRUD operation
         $currentRoute = request()->route()->getName();
         // dd($currentRoute);
-        return view('components.backend.sidebar', [ 'currentRoute' => $currentRoute ]);
+
+        return view('components.frontend.sidebar', [ 'currentRoute' => $currentRoute ]);
     }
 }

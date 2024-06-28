@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>Captcha | Admin - Login</title>
+    <title>Captcha | Citizen - Login</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="content">
@@ -50,7 +50,7 @@
                         <div class="login-right-wrap">
                             <h1>Login</h1>
 
-                            <form method="POST" action="{{ route('admin.login.store') }}" enctype="multipart/form">
+                            <form method="POST" action="{{ route('citizen.login.store') }}" enctype="multipart/form">
                                 @csrf
 
                                 <div class="form-group mb-2">
@@ -84,7 +84,7 @@
 
                             <div class="mt-4 text-center">
                                 <p class="mb-0">Already have an account ?
-                                    <a href="{{ route('admin.register') }}" class="fw-medium text-primary"> Register </a>
+                                    <a href="{{ route('citizen.register') }}" class="fw-medium text-primary"> Register </a>
                                 </p>
                             </div>
 

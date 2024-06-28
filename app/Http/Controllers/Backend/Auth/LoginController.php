@@ -13,7 +13,7 @@ class LoginController extends Controller
     public function login()
     {
         if (Auth::guard('web')->check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('admin.dashboard');
         } else {
             return view('backend.auth.login');
         }
@@ -21,8 +21,7 @@ class LoginController extends Controller
 
     public function authenticate(LoginRequest $request)
     {
-        $data = $request->validated();
-
+        $credentials = $request->validated();
         $credentials['email'] = $request->input('email');
         $credentials['password'] = $request->input('password');
         $remember_me = $request->has('remember_token')? true : false;
@@ -30,18 +29,21 @@ class LoginController extends Controller
         if (Auth::guard('web')->attempt($credentials, $remember_me)) {
             // Session::put('email', $request->input('email'));
 
-            return redirect()->route('dashboard')->with('message', 'You are login Successfully.');
+            return redirect()->route('admin.dashboard')->with('message', 'You are login Successfully.');
         }
         else{
-            return redirect()->route('login')->with(['Input' => $request->only('email','password'), 'error' => 'Your Email id and Password do not match our records!']);
+            return redirect()->route('admin.login')->with(['Input' => $request->only('email','password'), 'error' => 'Your Email id and Password do not match our records!']);
         }
 
     }
 
-    public function logout() {
-        Session::flush();
-        Auth::logout();
+    public function logout(Request $request) {
+        Auth::guard('web')->logout();
 
-        return redirect()->route('login')->with('message', 'You are logout Successfully.');
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login')->with('message', 'You are logout Successfully.');
     }
 }

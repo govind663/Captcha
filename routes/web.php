@@ -8,6 +8,10 @@ use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\Auth\RegisterController;
 use App\Http\Controllers\Backend\HomeController;
 
+// ========== Frontend
+use App\Http\Controllers\Frontend\Auth\LoginController AS CitizenLoginController;
+use App\Http\Controllers\Frontend\HomeController AS CitizenHomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,19 +23,19 @@ use App\Http\Controllers\Backend\HomeController;
 |
 */
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('citizen.login');
 })->name('/');
 
 
 Route::group(['prefix' => 'admin'],function(){
     // ======================= Admin Register
-    Route::get('register', [RegisterController::class, 'register'])->name('register');
-    Route::post('register/store', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('register', [RegisterController::class, 'register'])->name('admin.register');
+    Route::post('register/store', [RegisterController::class, 'store'])->name('admin.register.store');
 
     // ======================= Admin Login/Logout
-    Route::get('login', [LoginController::class, 'login'])->name('login');
-    Route::post('login/store', [LoginController::class, 'authenticate'])->name('login.store');
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('login', [LoginController::class, 'login'])->name('admin.login');
+    Route::post('login/store', [LoginController::class, 'authenticate'])->name('admin.login.store');
+    Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 
 
@@ -39,11 +43,33 @@ Route::group(['prefix' => 'admin'],function(){
 Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistoryMiddleware::class]], function () {
 
     // ===== Admin Dashboard
-    Route::get('dashboard', [HomeController::class, 'Admin_Home'])->name('dashboard');
+    Route::get('dashboard', [HomeController::class, 'Admin_Home'])->name('admin.dashboard');
 
     // ==== Update Password
-    Route::get('/change-password', [HomeController::class, 'changePassword'])->name('change-password');
-    Route::post('/change-password', [HomeController::class, 'updatePassword'])->name('update-password');
+    Route::get('/change-password', [HomeController::class, 'changePassword'])->name('admin.change-password');
+    Route::post('/change-password', [HomeController::class, 'updatePassword'])->name('admin.update-password');
 
+});
+
+Route::group(['prefix' => 'citizen'],function(){
+    // ======================= Citizens Register
+    Route::get('register', [RegisterController::class, 'Citizen_Register_Form'])->name('citizen.register');
+    Route::post('register/store', [RegisterController::class, 'Citizen_Store_Register'])->name('citizen.register.store');
+
+    // ======================= Citizens Login/Logout
+    Route::get('login', [CitizenLoginController::class, 'Citizen_Login_Form'])->name('citizen.login');
+    Route::post('login/store', [CitizenLoginController::class, 'Citizen_Authenticate'])->name('citizen.login.store');
+    Route::post('logout', [CitizenLoginController::class, 'Citizen_Logout'])->name('citizen.logout');
+});
+
+// ======================= Citizens Dashboard
+Route::group(['prefix' => 'citizen','middleware' => ['auth:citizen', PreventBackHistoryMiddleware::class]], function () {
+
+    // ===== Citizen Dashboard
+    Route::get('dashboard', [CitizenHomeController::class, 'Citizen_Home'])->name('citizen.dashboard');
+
+    // ==== Update Password
+    Route::get('/change-password', [CitizenHomeController::class, 'changePassword'])->name('citizen.change-password');
+    Route::post('/change-password', [CitizenHomeController::class, 'updatePassword'])->name('citizen.update-password');
 
 });

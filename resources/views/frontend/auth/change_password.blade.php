@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Captcha | Admin - Change Password
+Xoom Digital | Citizen - Change Password
 @endsection
 
 @push('styles')
@@ -26,7 +26,7 @@ Captcha | Admin - Change Password
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form method="POST" action="{{ route('admin.update-password') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('update-password') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group-customer customer-additional-form">
@@ -70,7 +70,7 @@ Captcha | Admin - Change Password
                                         </div>
 
                                         <div class="add-customer-btns text-start">
-                                            <a href="{{ route('admin.dashboard') }}" class="btn btn-danger">Cancel</a>
+                                            <a href="{{ route('dashboard') }}" class="btn btn-danger">Cancel</a>
                                             <button type="submit" class="btn btn-success">Submit</button>
                                         </div>
                                     </div>

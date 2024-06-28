@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>Captcha | Register</title>
+    <title>Captcha | Admin - Register</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="content">
@@ -53,7 +53,7 @@
                         <div class="login-right-wrap">
                             <h1>Register</h1>
 
-                            <form method="POST" action="{{ route('register.store') }}" enctype="multipart/form">
+                            <form method="POST" action="{{ route('admin.register.store') }}" enctype="multipart/form">
                                 @csrf
 
                                 <div class="form-group mb-2">
@@ -123,7 +123,7 @@
 
                             <div class="mt-4 text-center">
                                 <p class="mb-0">I don't have an account ?
-                                    <a href="{{ route('login') }}" class="fw-medium text-primary"> Login </a>
+                                    <a href="{{ route('admin.login') }}" class="fw-medium text-primary"> Login </a>
                                 </p>
                             </div>
 

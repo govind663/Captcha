@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Backend;
+namespace App\View\Components\Frontend;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Sidebar extends Component
+class Header extends Component
 {
     /**
      * Create a new component instance.
@@ -21,9 +21,6 @@ class Sidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        // === which tab is currentlt Active or not in CRUD operation
-        $currentRoute = request()->route()->getName();
-        // dd($currentRoute);
-        return view('components.backend.sidebar', [ 'currentRoute' => $currentRoute ]);
+        return view('components.frontend.header');
     }
 }

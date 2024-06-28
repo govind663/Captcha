@@ -1,22 +1,22 @@
 <div class="header header-one">
-    <a href="{{ route('admin.dashboard') }}"
+    <a href="{{ route('citizen.dashboard') }}"
         class="d-inline-flex d-sm-inline-flex align-items-center d-md-inline-flex d-lg-none align-items-center device-logo">
         <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo2" alt="Logo" style="width:150px; height:40px !important;">
     </a>
     <div class="main-logo d-inline float-start d-lg-flex align-items-center d-none d-sm-none d-md-none">
         <div class="logo-white">
-            <a href="{{ route('admin.dashboard') }}">
+            <a href="{{ route('citizen.dashboard') }}">
                 <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:40px !important;">
             </a>
-            <a href="{{ route('admin.dashboard') }}">
+            <a href="{{ route('citizen.dashboard') }}">
                 <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo-small" alt="Logo-Small">
             </a>
         </div>
         <div class="logo-color">
-            <a href="{{ route('admin.dashboard') }}">
+            <a href="{{ route('citizen.dashboard') }}">
                 <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:40px !important;">
             </a>
-            <a href="{{ route('admin.dashboard') }}">
+            <a href="{{ route('citizen.dashboard') }}">
                 <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo-small" alt="Logo-small">
             </a>
         </div>
@@ -67,18 +67,18 @@
                     <div class="subscription-menu">
                         <ul>
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.change-password') }}">Change Password</a>
+                                <a class="dropdown-item" href="{{ route('citizen.change-password') }}">Change Password</a>
                             </li>
                         </ul>
                     </div>
                     <div class="subscription-logout">
                         <ul>
                             <li class="pb-0">
-                                <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="{{ route('citizen.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i data-feather="log-out" class="me-1"></i>
                                     Logout
                                 </a>
-                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('citizen.logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </li>

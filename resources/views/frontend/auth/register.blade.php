@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>Captcha | Admin - Login</title>
+    <title>Captcha | Citizen - Register</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="content">
@@ -23,6 +23,9 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/style.css">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.css') }}">
 
     <!-- Toaster Message -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -48,10 +51,34 @@
 
                     <div class="login-right">
                         <div class="login-right-wrap">
-                            <h1>Login</h1>
+                            <h1>Register</h1>
 
-                            <form method="POST" action="{{ route('admin.login.store') }}" enctype="multipart/form">
+                            <form method="POST" action="{{ route('citizen.register.store') }}" enctype="multipart/form">
                                 @csrf
+
+                                <div class="form-group mb-2">
+                                    <label class="form-control-label"><b class="text-dark">Username : <span class="text-danger">*</span></b></label>
+                                   <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus placeholder="Enter Username">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group mb-2" >
+                                    <label><b class="text-dark">User Type : <span class="text-danger">*</span></b></label>
+                                    <select class="form-control @error('user_type') is-invalid @enderror select2" id="user_type" name="user_type">
+                                        <option value="">Select User Type</option>
+                                        <option value="1" {{ (old("user_type") == '1' ? "selected":"") }}>Super Admin</option>
+                                        <option value="2" {{ (old("user_type") == '2' ? "selected":"") }}>Admin</option>
+                                    </select>
+                                    @error('user_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 
                                 <div class="form-group mb-2">
                                     <label class="form-control-label"><b class="text-dark">Email Id : <span class="text-danger">*</span></b></label>
@@ -76,19 +103,32 @@
                                     </div>
                                 </div>
 
-                                <input type="hidden" name="remember_token" value="true">
+                                <div class="form-group mb-2">
+                                    <label class="form-control-label"><b class="text-dark">Confirm Password : <span class="text-danger">*</span></b></label>
+                                    <div class="pass-group">
+                                        <input id="password_confirmation" type="password" class="form-control pass-input @error('password_confirmation') is-invalid @enderror" name="password_confirmation" autocomplete="password_confirmation" placeholder="Enter Confirm Password">
+                                        <span class="fas fa-eye toggle-password"></span>
+                                        @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <br>
-                                <button class="btn btn-lg btn-block btn-primary w-100" type="submit">Login</button>
+                                <button class="btn btn-lg btn-block btn-primary w-100" type="submit">Register</button>
 
                             </form>
 
                             <div class="mt-4 text-center">
-                                <p class="mb-0">Already have an account ?
-                                    <a href="{{ route('admin.register') }}" class="fw-medium text-primary"> Register </a>
+                                <p class="mb-0">I don't have an account ?
+                                    <a href="{{ route('citizen.register') }}" class="fw-medium text-primary"> Login </a>
                                 </p>
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -104,6 +144,42 @@
 
     <!-- Custom JS -->
     <script src="{{ url('/') }}/assets/js/script.js"></script>
+
+    <!-- select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script>
+
+    {{-- Adding Search Company Name --}}
+    <script>
+        var typed = "";
+        $('#user_type').select2({
+            language: {
+                noResults: function(term) {
+                    typed = $('.select2-search__field').val();
+                }
+            }
+
+        });
+        $('#user_type').on('select2:select', function(e) {
+            typed = ""; // clear
+        });
+        $("#but").on("click", function() {
+            if (typed) {
+                // var value = prompt("Do you have a state abbriviation for "+typed+"?"); // change typed to value where necessary
+
+                // Set the value, creating a new option if necessary
+                if ($('#user_type').find("option[value='" + typed + "']").length) {
+                    $('#user_type').val(typed).trigger('change');
+                } else {
+                    // Create a DOM Option and pre-select by default
+
+                    var newOption = new Option(typed, typed, true, true);
+                    // Append it to the select
+                    $('#user_type').append(newOption).trigger('change');
+                }
+            }
+        });
+    </script>
 
     <script>
         @if (Session::has('message'))
