@@ -23,12 +23,12 @@ class LoginRequest extends FormRequest
     {
         if ($this->id){
             $rule = [
-                'email' => 'required|string|email|max:255|exists:users,email'.$this->id,
+                'email' => 'required|string|email|max:255|exists:citizens,email'.$this->id,
                 'password' => 'required|string',
             ];
         }else{
             $rule = [
-                'email' => 'required|string|email|max:255|exists:users,email',
+                'email' => 'required|string|email|max:255|exists:citizens,email',
                 'password' => 'required|string|min:8',
             ];
         }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\Auth\RegisterController;
 use App\Http\Controllers\Backend\HomeController;
 
 // ========== Frontend
+use App\Http\Controllers\Frontend\Auth\RegisterController AS CitizenRegisterController;
 use App\Http\Controllers\Frontend\Auth\LoginController AS CitizenLoginController;
 use App\Http\Controllers\Frontend\HomeController AS CitizenHomeController;
 
@@ -53,8 +54,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
 
 Route::group(['prefix' => 'citizen'],function(){
     // ======================= Citizens Register
-    Route::get('register', [RegisterController::class, 'Citizen_Register_Form'])->name('citizen.register');
-    Route::post('register/store', [RegisterController::class, 'Citizen_Store_Register'])->name('citizen.register.store');
+    Route::get('register', [CitizenRegisterController::class, 'Citizen_Register_Form'])->name('citizen.register');
+    Route::post('register/store', [CitizenRegisterController::class, 'Citizen_Store_Register'])->name('citizen.register.store');
 
     // ======================= Citizens Login/Logout
     Route::get('login', [CitizenLoginController::class, 'Citizen_Login_Form'])->name('citizen.login');

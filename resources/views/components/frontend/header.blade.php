@@ -57,7 +57,7 @@
                     @elseif (Auth::user()->user_type == '2')
                     <span class="user-name">Admin</span>
                     @elseif (Auth::user()->user_type == '3')
-                    <span class="user-name">User</span>
+                    <span class="user-name">Citizen</span>
                     @endif
 
                 </span>

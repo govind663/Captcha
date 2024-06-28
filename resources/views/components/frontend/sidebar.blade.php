@@ -4,7 +4,7 @@
             <ul class="sidebar-vertical">
 
                 <li class="{{ $currentRoute === 'dashboard' ? 'active' : '' }}">
-                    <a href="{{ route('admin.dashboard') }}">
+                    <a href="{{ route('citizen.dashboard') }}">
                         <i class="fe fe-home"></i>
                         <span>Dashboard</span>
                     </a>

@@ -22,12 +22,13 @@ class LoginController extends Controller
 
     public function Citizen_Authenticate(LoginRequest $request)
     {
-        $credentials = $request->validated();
+        $data = $request->validated();
         $credentials['email'] = $request->input('email');
         $credentials['password'] = $request->input('password');
         $remember_me = $request->has('remember_token')? true : false;
 
-        if (auth()->guard('citizen')->attempt($credentials, $remember_me)) {
+        if (Auth::guard('citizen')->attempt($credentials, $remember_me)) {
+            Session::put('email', $request->input('email'));
 
             return redirect()->route('citizen.dashboard')->with('message', 'You are login Successfully.');
         }

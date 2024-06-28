@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
-    public function Admin_Home(){
+    public function Citizen_Home(){
         return view('frontend.citizen-dashboard');
     }
 

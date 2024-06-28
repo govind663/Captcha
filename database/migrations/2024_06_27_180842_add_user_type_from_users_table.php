@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('user_type')->nullable()->after('id')->comment('
                 1: Super Admin,
                 2: Admin,
-                3: User,
+                3: Citizen,
             ');
 
         });

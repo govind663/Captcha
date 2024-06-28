@@ -15,7 +15,7 @@ class RegisterController extends Controller
         return view('frontend.auth.register');
     }
 
-    public function Citizen_Store_Register(Request $request){
+    public function Citizen_Store_Register(RegisterRequest $request){
         $request->validated();
         try {
             $data = new Citizen();

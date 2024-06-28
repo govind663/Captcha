@@ -72,6 +72,7 @@
                                         <option value="">Select User Type</option>
                                         <option value="1" {{ (old("user_type") == '1' ? "selected":"") }}>Super Admin</option>
                                         <option value="2" {{ (old("user_type") == '2' ? "selected":"") }}>Admin</option>
+                                        <option value="3" {{ (old("user_type") == '3' ? "selected":"") }}>Citizen</option>
                                     </select>
                                     @error('user_type')
                                         <span class="invalid-feedback" role="alert">
