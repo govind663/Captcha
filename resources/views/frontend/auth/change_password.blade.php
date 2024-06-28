@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('frontend.layouts.master')
 
 @section('title')
 Xoom Digital | Citizen - Change Password
@@ -26,7 +26,7 @@ Xoom Digital | Citizen - Change Password
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form method="POST" action="{{ route('update-password') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('citizen.update-password') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group-customer customer-additional-form">
@@ -70,7 +70,7 @@ Xoom Digital | Citizen - Change Password
                                         </div>
 
                                         <div class="add-customer-btns text-start">
-                                            <a href="{{ route('dashboard') }}" class="btn btn-danger">Cancel</a>
+                                            <a href="{{ route('citizen.dashboard') }}" class="btn btn-danger">Cancel</a>
                                             <button type="submit" class="btn btn-success">Submit</button>
                                         </div>
                                     </div>
