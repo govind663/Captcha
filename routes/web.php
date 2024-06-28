@@ -50,6 +50,15 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
     Route::get('/change-password', [HomeController::class, 'changePassword'])->name('admin.change-password');
     Route::post('/change-password', [HomeController::class, 'updatePassword'])->name('admin.update-password');
 
+    // ==== Manage Package Type
+    // Route::resource('package-type', PackageTypeController::class);
+
+    // ==== Manage Package
+    // Route::resource('package', PackageController::class);
+
+    // ==== Manage Citizen
+    // Route::resource('citizen', CitizenController::class);
+
 });
 
 Route::group(['prefix' => 'citizen'],function(){
