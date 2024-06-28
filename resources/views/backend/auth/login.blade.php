@@ -84,7 +84,7 @@
 
                             {{-- <div class="mt-4 text-center">
                                 <p class="mb-0">Already have an account ?
-                                    {{-- <a href="{{ route('admin.register') }}" class="fw-medium text-primary"> Register </a> --}}
+                                    <a href="{{ route('admin.register') }}" class="fw-medium text-primary"> Register </a>
                                 </p>
                             </div> --}}
 
