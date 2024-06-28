@@ -33,7 +33,7 @@ class LoginController extends Controller
             return redirect()->route('dashboard')->with('message', 'You are login Successfully.');
         }
         else{
-            return redirect()->route('/')->with(['Input' => $request->only('email','password'), 'error' => 'Your Email id and Password do not match our records!']);
+            return redirect()->route('login')->with(['Input' => $request->only('email','password'), 'error' => 'Your Email id and Password do not match our records!']);
         }
 
     }
@@ -42,6 +42,6 @@ class LoginController extends Controller
         Session::flush();
         Auth::logout();
 
-        return redirect()->route('/')->with('message', 'You are logout Successfully.');
+        return redirect()->route('login')->with('message', 'You are logout Successfully.');
     }
 }

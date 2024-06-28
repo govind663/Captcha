@@ -36,10 +36,14 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => __('Username field cannot be empty'),
+            'name.required' => __('Username is required.'),
             'name.string' => __('Invalid name format'),
             'name.min' => __('The length of name must be at least 4 characters'),
             'name.max' => __('The length of name can not exceed 255 characters'),
+
+            'user_type.required' => __('User type is required'),
+            'user_type.numeric' => __('User type must be numeric'),
+            'user_type.max' => __('User type must be max 255'),
 
             'email.required' => __('Email Id is required'),
             'email.unique' => __('This email has already been registered'),
@@ -48,10 +52,6 @@ class RegisterRequest extends FormRequest
             'password.required' => __('Password is required'),
             'password.confirmed' => __('Passwords do not match'),
             'password_confirmation.required' => __('Confirm Password is required'),
-
-            'user_type.required' => __('User type is required'),
-            'user_type.numeric' => __('User type must be numeric'),
-            'user_type.max' => __('User type must be max 255'),
         ];
     }
 }

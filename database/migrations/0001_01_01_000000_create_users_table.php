@@ -18,10 +18,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->integer('inserted_by')->nullable();
-            $table->timestamp('inserted_dt')->nullable();
-            $table->integer('modified_by')->nullable();
-            $table->timestamp('modified_dt')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->integer('deleted_by')->nullable();
             $table->timestamp('deleted_at')->nullable();
         });

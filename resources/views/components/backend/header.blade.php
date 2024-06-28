@@ -1,22 +1,22 @@
 <div class="header header-one">
-    <a href="{{ route('home') }}"
+    <a href="{{ route('dashboard') }}"
         class="d-inline-flex d-sm-inline-flex align-items-center d-md-inline-flex d-lg-none align-items-center device-logo">
-        <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo2" alt="Logo" style="width:150px; height:50px !important;">
+        <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo2" alt="Logo" style="width:150px; height:40px !important;">
     </a>
     <div class="main-logo d-inline float-start d-lg-flex align-items-center d-none d-sm-none d-md-none">
         <div class="logo-white">
-            <a href="{{ route('home') }}">
-                <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:50px !important;">
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:40px !important;">
             </a>
-            <a href="{{ route('home') }}">
+            <a href="{{ route('dashboard') }}">
                 <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo-small" alt="Logo-Small">
             </a>
         </div>
         <div class="logo-color">
-            <a href="{{ route('home') }}">
-                <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:50px !important;">
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:40px !important;">
             </a>
-            <a href="{{ route('home') }}">
+            <a href="{{ route('dashboard') }}">
                 <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo-small" alt="Logo-small">
             </a>
         </div>
@@ -47,16 +47,19 @@
         <li class="nav-item dropdown">
             <a href="javascript:void(0)" class="user-link  nav-link" data-bs-toggle="dropdown">
                 <span class="user-img">
-                    <img src="{{ url('/') }}/assets/img/Gadi-Insurance.png" alt="img" class="profilesidebar">
+                    <img src="{{ url('/') }}/assets/img/logo-small.png" alt="img" class="profilesidebar">
                     <span class="animate-circle"></span>
                 </span>
                 <span class="user-content">
+                    <span class="user-name">{{ Auth::user()->name }}</span>
                     @if (Auth::user()->user_type = '1')
-                    <span class="user-details">Admin</span>
+                    <span class="user-name">Super Admin</span>
                     @elseif (Auth::user()->user_type = '2')
-                    <span class="user-details">Agent</span>
+                    <span class="user-name">Admin</span>
+                    @elseif (Auth::user()->user_type = '3')
+                    <span class="user-name">User</span>
                     @endif
-                    <span class="user-name">{{ Auth::user()->email }}</span>
+
                 </span>
             </a>
             <div class="dropdown-menu menu-drop-user">

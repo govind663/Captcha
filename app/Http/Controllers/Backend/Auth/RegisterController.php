@@ -25,16 +25,16 @@ class RegisterController extends Controller
             $data->user_type = $request->get('user_type');
             $data->email = $request->get('email');
             $data->password = Hash::make($request->get('password'));
-            $data->inserted_dt = date("Y-m-d H:i:s");
+            $data->created_at = date("Y-m-d H:i:s");
             $data->save();
 
             $update = [
-                'inserted_by' => $data->id,
+                'created_by' => $data->id,
             ];
 
             User::where('id', $data->id)->update($update);
 
-            return redirect()->route('/')->with('message', 'You are Register Sucessfully.');
+            return redirect()->route('login')->with('message', 'You are Register Sucessfully.');
 
         } catch(\Exception $ex){
 
