@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\Auth\RegisterController;
 use App\Http\Controllers\Backend\HomeController;
+use App\Http\Controllers\Backend\PackageTypeController;
+use App\Http\Controllers\Backend\PackageController;
 
 // ========== Frontend
 use App\Http\Controllers\Frontend\Auth\RegisterController AS CitizenRegisterController;
@@ -51,10 +53,10 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
     Route::post('/change-password', [HomeController::class, 'updatePassword'])->name('admin.update-password');
 
     // ==== Manage Package Type
-    // Route::resource('package-type', PackageTypeController::class);
+    Route::resource('package-type', PackageTypeController::class);
 
     // ==== Manage Package
-    // Route::resource('package', PackageController::class);
+    Route::resource('package', PackageController::class);
 
     // ==== Manage Citizen
     // Route::resource('citizen', CitizenController::class);
