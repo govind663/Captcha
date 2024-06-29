@@ -1,23 +1,23 @@
 <div class="header header-one">
     <a href="{{ route('citizen.dashboard') }}"
         class="d-inline-flex d-sm-inline-flex align-items-center d-md-inline-flex d-lg-none align-items-center device-logo">
-        <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo2" alt="Logo" style="width:150px; height:40px !important;">
+        <img src="{{ url('/') }}/assets/img/captcha_fav_ico.png" class="img-fluid logo2" alt="Logo">
     </a>
     <div class="main-logo d-inline float-start d-lg-flex align-items-center d-none d-sm-none d-md-none">
         <div class="logo-white">
             <a href="{{ route('citizen.dashboard') }}">
-                <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:40px !important;">
+                <img src="{{ url('/') }}/assets/img/captcha_logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:200px;">
             </a>
             <a href="{{ route('citizen.dashboard') }}">
-                <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo-small" alt="Logo-Small">
+                <img src="{{ url('/') }}/assets/img/captcha_fav_ico.png" class="img-fluid logo-small" alt="Logo-Small">
             </a>
         </div>
         <div class="logo-color">
             <a href="{{ route('citizen.dashboard') }}">
-                <img src="{{ url('/') }}/assets/img/logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:150px; height:40px !important;">
+                <img src="{{ url('/') }}/assets/img/captcha_logo.png" class="img-fluid logo-blue" alt="Logo-Full" style="width:200px;">
             </a>
             <a href="{{ route('citizen.dashboard') }}">
-                <img src="{{ url('/') }}/assets/img/logo-small.png" class="img-fluid logo-small" alt="Logo-small">
+                <img src="{{ url('/') }}/assets/img/captcha_fav_ico.png" class="img-fluid logo-small" alt="Logo-small">
             </a>
         </div>
     </div>
@@ -47,7 +47,7 @@
         <li class="nav-item dropdown">
             <a href="javascript:void(0)" class="user-link  nav-link" data-bs-toggle="dropdown">
                 <span class="user-img">
-                    <img src="{{ url('/') }}/assets/img/logo-small.png" alt="img" class="profilesidebar">
+                    <img src="{{ url('/') }}/assets/img/user_profile.png" alt="img" class="profilesidebar">
                     <span class="animate-circle"></span>
                 </span>
                 <span class="user-content">

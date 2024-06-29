@@ -41,6 +41,9 @@
 <script src="{{ asset('assets/js/theme-settings.js') }}"></script>
 <script src="{{ asset('assets/js/greedynav.js') }}"></script>
 
+<!--- Sumernote Js --->
+<script src="{{ asset('/assets/plugins/summernote/summernote-lite.min.js') }}"></script>
+
 <!-- Custom JS -->
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <script src="{{ asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}" data-cf-settings="f6e2172995d506bdd2e27e54-|49" defer></script>

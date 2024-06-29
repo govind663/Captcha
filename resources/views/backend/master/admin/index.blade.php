@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Package Type | List
+Employee | List
 @endsection
 
 @push('styles')
@@ -38,10 +38,10 @@ Package Type | List
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Package type</h3>
+                    <h3 class="page-title">Manage Employee</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">All Package Type List</li>
+                        <li class="breadcrumb-item active">All Employee List</li>
                     </ul>
                 </div>
             </div>
@@ -53,11 +53,11 @@ Package Type | List
                 <div class="card">
                     <div class="row card-body">
                         <div class="col-10">
-                            <h5 class="card-title">All Package Type List</h5>
+                            <h5 class="card-title">All Employee List</h5>
                         </div>
                         <div class="col-2 float-right">
-                            <a href="{{ route('package-type.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Package Type
+                            <a href="{{ route('admin.create') }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Employee
                             </a>
                         </div>
                     </div>
@@ -68,32 +68,33 @@ Package Type | List
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Package Type</th>
-                                        <th class="no-export">Edit </th>
-                                        <th class="no-export">Delete </th>
+                                        <th>Name</th>
+                                        <th>User Type</th>
+                                        <th>Email Id</th>
+                                        <th class="no-export">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($packageTypes as $key=>$value )
+                                    @foreach ($employees as $key=>$value )
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $value->name }}</td>
+                                        @if($value->user_type == 2)
+                                        <td><span class="badge bg-success text-light">Admin</span></td>
+                                        @endif
 
-                                        <td class="no-export">
-                                            <a href="{{ route('package-type.edit', $value->id) }}">
-                                                <button class="btn btn-warning btn-sm text-dark">
-                                                    <i class="far fa-edit"></i>
-                                                </button>
+                                        <td>{{ $value->email }}</td>
+                                        <td class="no-export d-flex">
+                                            <a href="{{ route('admin.edit', $value->id) }}" class="btn btn-warning btn-sm text-dark">
+                                                <i class="far fa-edit me-2"></i>Edit
                                             </a>
-                                        </td>
-
-                                        <td class="no-export">
-                                            <form action="{{ route('package-type.destroy', $value->id) }}" method="post">
+                                            &nbsp;
+                                            <form action="{{ route('admin.destroy', $value->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">
-                                                    <i class="far fa-trash-alt"></i>
+                                                    <i class="far fa-trash-alt me-2"></i>Delete
                                                 </button>
                                             </form>
                                         </td>
@@ -157,7 +158,7 @@ Package Type | List
                     columns: ':not(.no-export)',
                 },
                header: true,
-               title: 'All Package Type List',
+               title: 'Report',
                orientation: 'landscape',
                pageSize: 'A4',
                customize: function(doc) {

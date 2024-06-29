@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('backend.layouts.master')
 
 @section('title')
 Package | List
@@ -8,12 +8,12 @@ Package | List
 <style>
     .btn-secondary {
         color: #fff;
-        background-color: #e77c09 !important;
-        border-color: #e77c09 !important;
+        background-color: #387dff !important;
+        border-color: #387dff !important;
     }
     .pagination li.active a.page-link {
-        background: #e77c09 !important;
-        border-color: #e77c09 !important;
+        background: #387dff !important;
+        border-color: #387dff !important;
         border-radius: 5px;
     }
     table.dataTable thead > tr > th.dt-orderable-asc, table.dataTable thead > tr > th.dt-orderable-desc, table.dataTable thead > tr > th.dt-ordering-asc, table.dataTable thead > tr > th.dt-ordering-desc, table.dataTable thead > tr > td.dt-orderable-asc, table.dataTable thead > tr > td.dt-orderable-desc, table.dataTable thead > tr > td.dt-ordering-asc, table.dataTable thead > tr > td.dt-ordering-desc {
@@ -24,7 +24,7 @@ Package | List
         text-align: left !important;
     }
     .form-control {
-        border: 1px solid #e77c09 !important;
+        border: 1px solid #387dff !important;
     }
 </style>
 @endpush
@@ -40,7 +40,7 @@ Package | List
                 <div class="col">
                     <h3 class="page-title">Manage Package type</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">All Package List</li>
                     </ul>
                 </div>

@@ -11,7 +11,7 @@ class PackageTypeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,25 @@ class PackageTypeRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->id){
+            $rule = [
+                'name' => 'required|string|max:255',
+            ];
+        }else{
+            $rule = [
+                'name' => 'required|string|max:255|unique:package_types,name,NULL,id,deleted_at,NULL',
+            ];
+        }
+        return $rule;
+    }
+
+    public function messages()
+    {
         return [
-            //
+            'name.required' => __('Name is required'),
+            'name.string' => __('The name must be a string.'),
+            'name.max' => __('The length of name should not exceed 255 characters'),
+            'name.unique' => __('The name has already been taken.'),
         ];
     }
 }

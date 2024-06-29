@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('backend.layouts.master')
 
 @section('title')
 Package | Add
@@ -7,10 +7,10 @@ Package | Add
 @push('styles')
 <style>
     .form-control {
-        border: 1px solid #e77c09 !important;
+        border: 1px solid #387dff !important;
     }
     .note-editor.note-airframe, .note-editor.note-frame {
-        border: 1px solid #e77c09 !important;
+        border: 1px solid #387dff !important;
     }
 </style>
 @endpush
@@ -51,7 +51,7 @@ Package | Add
                                         <div class="col-lg-4 col-md-12 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Select Package Type : <span class="text-danger">*</span></b></label>
-                                                <select  class="form-control @error('package_type_id') is-invalid @enderror select" id="package_type_id" name="package_type_id">
+                                                <select  class="form-control @error('package_type_id') is-invalid @enderror select2" id="package_type_id" name="package_type_id">
                                                     <option value="">Select Package Type</option>
                                                     @foreach ($packageTypes as $value )
                                                     <option value="{{ $value->id }}" {{ (old("package_type_id") == $value->id ? "selected":"") }}>{{ $value->name }}</option>
@@ -166,5 +166,36 @@ Package | Add
 
     }
 
+</script>
+
+<script>
+    var typed = "";
+    $('#package_type_id').select2({
+        language: {
+            noResults: function(term) {
+                typed = $('.select2-search__field').val();
+            }
+        }
+
+    });
+    $('#package_type_id').on('select2:select', function(e) {
+        typed = ""; // clear
+    });
+    $("#but").on("click", function() {
+        if (typed) {
+            // var value = prompt("Do you have a state abbriviation for "+typed+"?"); // change typed to value where necessary
+
+            // Set the value, creating a new option if necessary
+            if ($('#package_type_id').find("option[value='" + typed + "']").length) {
+                $('#package_type_id').val(typed).trigger('change');
+            } else {
+                // Create a DOM Option and pre-select by default
+
+                var newOption = new Option(typed, typed, true, true);
+                // Append it to the select
+                $('#package_type_id').append(newOption).trigger('change');
+            }
+        }
+    });
 </script>
 @endpush

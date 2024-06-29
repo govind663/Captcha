@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('backend.layouts.master')
 
 @section('title')
   Package Type | Update
@@ -7,7 +7,7 @@
 @push('styles')
 <style>
     .form-control {
-        border: 1px solid #e77c09 !important;
+        border: 1px solid #387dff !important;
     }
 </style>
 @endpush

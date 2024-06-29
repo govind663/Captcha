@@ -12,7 +12,7 @@
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ url('/') }}/assets/img/logo-small.png">
+    <link rel="shortcut icon" href="{{ url('/') }}/assets/img/captcha_fav_ico.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/bootstrap.min.css">
@@ -46,7 +46,7 @@
         <div class="login-wrapper">
             <div class="container">
 
-                <img class="img-fluid logo-dark mb-2 logo-color" src="{{ url('/') }}/assets/img/logo.png" alt="Logo">
+                <img class="img-fluid logo-dark mb-2 logo-color" src="{{ url('/') }}/assets/img/captcha_logo.png" alt="Logo">
                 <div class="loginbox">
 
                     <div class="login-right">

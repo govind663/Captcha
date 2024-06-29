@@ -9,7 +9,7 @@
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{ asset('assets/img/logo-small.png') }}">
+<link rel="shortcut icon" href="{{ asset('assets/img/captcha_fav_ico.png') }}">
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
