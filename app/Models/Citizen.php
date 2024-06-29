@@ -17,9 +17,13 @@ class Citizen extends Authenticatable
      */
     protected $fillable = [
         'user_type',
+        'mobile_no',
         'name',
         'email',
         'password',
+        'user_id',
+        'package_id',
+        'payment_type',
         'created_by',
         'created_at',
         'updated_by',

@@ -26,12 +26,20 @@ class RegisterRequest extends FormRequest
                 'name' => 'required|string|min:4|max:255',
                 'user_type' =>'required|numeric|max:255',
                 'email' => 'required|string|email|max:255|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+                'mobile_no' => 'required|numeric',
+                'user_id' => 'required|numeric',
+                'package_id' => 'required|numeric',
+                'payment_type' => 'required|numeric',
             ];
         }else{
             $rule = [
                 'name' => 'required|string|min:4|max:255',
                 'user_type' =>'required|numeric|max:255',
                 'email' => 'required|string|email|max:255|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+                'mobile_no' => 'required|numeric',
+                'user_id' => 'required|numeric',
+                'package_id' => 'required|numeric',
+                'payment_type' => 'required|numeric',
                 'password' => 'required|string|min:8|confirmed',
                 'password_confirmation' => 'required',
             ];
@@ -54,6 +62,18 @@ class RegisterRequest extends FormRequest
             'email.required' => __('Email Id is required'),
             'email.unique' => __('This email has already been registered'),
             'email.email' => __('Please enter a valid Email address'),
+
+            'mobile_no.required' => __('Mobile Number is required'),
+            'mobile_no.numeric' => __('Mobile Number must be numeric'),
+
+            'user_id.required' => __('Admin Name is required'),
+            'user_id.numeric' => __('Admin Name must be numeric'),
+
+            'package_id.required' => __('Package Name is required'),
+            'package_id.numeric' => __('Package Name must be numeric'),
+
+            'payment_type.required' => __('Payment Type is required'),
+            'payment_type.numeric' => __('Payment Type must be numeric'),
 
             'password.required' => __('Password is required'),
             'password.confirmed' => __('Passwords do not match'),

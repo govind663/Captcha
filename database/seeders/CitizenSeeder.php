@@ -16,7 +16,7 @@ class CitizenSeeder extends Seeder
     public function run(): void
     {
         DB::table('citizens')->insert([
-            'f_name' => 'Abhishek G Jha',
+            'name' => 'Abhishek G Jha',
             'user_type' => 'Jha',
             'email' => 'abhishek.j.456@gmail.com',
             'password' => Hash::make('1234567890'),

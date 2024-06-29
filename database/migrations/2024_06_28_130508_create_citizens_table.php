@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Package;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +16,15 @@ return new class extends Migration
         Schema::create('citizens', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->integer('user_type')->unique()->comment('1: Super Admin, 2: Admin, 3: Citizen')->nullable();
+            $table->integer('user_type')->comment('1: Super Admin, 2: Admin, 3: Citizen')->nullable();
+            $table->string('mobile_no')->unique()->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken()->nullable();
+            $table->foreignIdFor(User::class)->nullable();
+            $table->foreignIdFor(Package::class)->nullable();
+            $table->integer('payment_type')->default(0)->comment('1 => Cash, 2 => Cheque, 3 => Online Transfer, 4 => GooglePay, 5 => PhonePay');
             $table->integer('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->integer('updated_by')->nullable();

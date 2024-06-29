@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Auth\RegisterRequest;
 use App\Models\Citizen;
+use App\Models\Package;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +28,10 @@ class CitizenController extends Controller
      */
     public function create()
     {
-        return view('backend.master.citizens.create');
+        $admins = User::orderBy("id","desc")->where('user_type', 2 )->whereNull('deleted_at')->get();
+        $packages = Package::orderBy("id","desc")->whereNull('deleted_at')->get();
+
+        return view('backend.master.citizens.create', ['admins' => $admins, 'packages' => $packages]);
     }
 
     /**
@@ -40,6 +45,10 @@ class CitizenController extends Controller
             $data->user_type = $request->get('user_type');
             $data->name = $request->get('name');
             $data->email = $request->get('email');
+            $data->mobile_no = $request->get('mobile_no');
+            $data->user_id = $request->get('user_id');
+            $data->package_id = $request->get('package_id');
+            $data->payment_type = $request->get('payment_type');
             $data->password = Hash::make($request->get('password'));
             $data->created_at = date("Y-m-d H:i:s");
             $data->created_by = Auth::user()->id;
@@ -59,7 +68,10 @@ class CitizenController extends Controller
     public function show(string $id)
     {
         $employee = Citizen::find($id);
-        return view('backend.master.citizens.show', ['citizen' => $employee]);
+        $admins = User::orderBy("id","desc")->where('user_type', 2 )->whereNull('deleted_at')->get();
+        $packages = Package::orderBy("id","desc")->whereNull('deleted_at')->get();
+
+        return view('backend.master.citizens.show', ['citizen' => $employee, 'admins' => $admins, 'packages' => $packages]);
     }
 
     /**
@@ -68,7 +80,10 @@ class CitizenController extends Controller
     public function edit(string $id)
     {
         $citizen = Citizen::find($id);
-        return view('backend.master.citizens.edit', ['citizen' => $citizen]);
+        $admins = User::orderBy("id","desc")->where('user_type', 2 )->whereNull('deleted_at')->get();
+        $packages = Package::orderBy("id","desc")->whereNull('deleted_at')->get();
+
+        return view('backend.master.citizens.edit', ['citizen' => $citizen, 'admins' => $admins, 'packages' => $packages]);
     }
 
     /**
@@ -82,6 +97,10 @@ class CitizenController extends Controller
             $data->user_type = $request->get('user_type');
             $data->name = $request->get('name');
             $data->email = $request->get('email');
+            $data->mobile_no = $request->get('mobile_no');
+            $data->user_id = $request->get('user_id');
+            $data->package_id = $request->get('package_id');
+            $data->payment_type = $request->get('payment_type');
             $data->updated_at = date("Y-m-d H:i:s");
             $data->updated_by = Auth::user()->id;
             $data->save();

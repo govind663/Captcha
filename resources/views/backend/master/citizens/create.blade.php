@@ -46,6 +46,23 @@ Citizen | Add
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="form-group mb-3" >
+                                                <label><b class="text-dark">User Type : <span class="text-danger">*</span></b></label>
+                                                <select class="form-control @error('user_type') is-invalid @enderror select2" id="user_type" name="user_type">
+                                                    <option value="">Select User Type</option>
+                                                    {{-- <option value="1" {{ (old("user_type") == '1' ? "selected":"") }}>Super Admin</option>
+                                                    <option value="2" {{ (old("user_type") == '2' ? "selected":"") }}>Admin</option> --}}
+                                                    <option value="3" {{ (old("user_type") == '3' ? "selected":"") }}>Citizen</option>
+                                                </select>
+                                                @error('user_type')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Email Id : <span class="text-danger">*</span></b></label>
                                                 <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Enter Email Id">
@@ -59,15 +76,64 @@ Citizen | Add
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Mobiile Number : <span class="text-danger">*</span></b></label>
+                                                <input type="text" maxlength="10" id="mobile_no" name="mobile_no" class="form-control @error('mobile_no') is-invalid @enderror" value="{{ old('mobile_no') }}" placeholder="Enter Mobiile Number">
+
+                                                @error('mobile_no')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="form-group mb-3" >
-                                                <label><b class="text-dark">User Type : <span class="text-danger">*</span></b></label>
-                                                <select class="form-control @error('user_type') is-invalid @enderror select2" id="user_type" name="user_type">
-                                                    <option value="">Select User Type</option>
-                                                    {{-- <option value="1" {{ (old("user_type") == '1' ? "selected":"") }}>Super Admin</option>
-                                                    <option value="2" {{ (old("user_type") == '2' ? "selected":"") }}>Admin</option> --}}
-                                                    <option value="3" {{ (old("user_type") == '3' ? "selected":"") }}>Citizen</option>
+                                                <label><b class="text-dark">Select Admin : <span class="text-danger">*</span></b></label>
+                                                <select class="form-control @error('user_id') is-invalid @enderror select2" id="user_id" name="user_id">
+                                                    <option value="">Select Admin</option>
+                                                    @foreach($admins as $admin)
+                                                    <option value="{{$admin->id}}" {{ (old("user_id") == $admin->id ? "selected":"") }}>{{$admin->name}}</option>
+                                                    @endforeach
                                                 </select>
-                                                @error('user_type')
+                                                @error('user_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="form-group mb-3" >
+                                                <label><b class="text-dark">Select Package : <span class="text-danger">*</span></b></label>
+                                                <select class="form-control @error('package_id') is-invalid @enderror select2" id="package_id" name="package_id">
+                                                    <option value="">Select Package</option>
+                                                    @foreach($packages as $package)
+                                                    <option value="{{$package->id}}" {{ (old("package_id") == $package->id ? "selected":"") }}>{{$package->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('package_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3" >
+                                                <label><b>Payment Type : <span class="text-danger">*</span></b></label>
+                                                <select class="@error('payment_type') is-invalid @enderror select" id="payment_type" name="payment_type">
+                                                    <option value="">Select Payment Type</option>
+                                                    <option value="1" {{ (old("payment_type") == "1" ? "selected":"") }}>Cash</option>
+                                                    <option value="2" {{ (old("payment_type") == "2" ? "selected":"") }}>Cheque</option>
+                                                    <option value="3" {{ (old("payment_type") == "3" ? "selected":"") }}>Online Transfer</option>
+                                                    <option value="4" {{ (old("payment_type") == "4" ? "selected":"") }}>GooglePay</option>
+                                                    <option value="5" {{ (old("payment_type") == "5" ? "selected":"") }}>PhonePay</option>
+                                                </select>
+                                                @error('payment_type')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -143,6 +209,99 @@ Citizen | Add
                 var newOption = new Option(typed, typed, true, true);
                 // Append it to the select
                 $('#user_type').append(newOption).trigger('change');
+            }
+        }
+    });
+</script>
+
+<script>
+    var typed = "";
+    $('#user_id').select2({
+        language: {
+            noResults: function(term) {
+                typed = $('.select2-search__field').val();
+            }
+        }
+
+    });
+    $('#user_id').on('select2:select', function(e) {
+        typed = ""; // clear
+    });
+    $("#but").on("click", function() {
+        if (typed) {
+            // var value = prompt("Do you have a state abbriviation for "+typed+"?"); // change typed to value where necessary
+
+            // Set the value, creating a new option if necessary
+            if ($('#user_id').find("option[value='" + typed + "']").length) {
+                $('#user_id').val(typed).trigger('change');
+            } else {
+                // Create a DOM Option and pre-select by default
+
+                var newOption = new Option(typed, typed, true, true);
+                // Append it to the select
+                $('#user_id').append(newOption).trigger('change');
+            }
+        }
+    });
+</script>
+
+<script>
+    var typed = "";
+    $('#package_id').select2({
+        language: {
+            noResults: function(term) {
+                typed = $('.select2-search__field').val();
+            }
+        }
+
+    });
+    $('#package_id').on('select2:select', function(e) {
+        typed = ""; // clear
+    });
+    $("#but").on("click", function() {
+        if (typed) {
+            // var value = prompt("Do you have a state abbriviation for "+typed+"?"); // change typed to value where necessary
+
+            // Set the value, creating a new option if necessary
+            if ($('#package_id').find("option[value='" + typed + "']").length) {
+                $('#package_id').val(typed).trigger('change');
+            } else {
+                // Create a DOM Option and pre-select by default
+
+                var newOption = new Option(typed, typed, true, true);
+                // Append it to the select
+                $('#package_id').append(newOption).trigger('change');
+            }
+        }
+    });
+</script>
+
+<script>
+    var typed = "";
+    $('#payment_type').select2({
+        language: {
+            noResults: function(term) {
+                typed = $('.select2-search__field').val();
+            }
+        }
+
+    });
+    $('#payment_type').on('select2:select', function(e) {
+        typed = ""; // clear
+    });
+    $("#but").on("click", function() {
+        if (typed) {
+            // var value = prompt("Do you have a state abbriviation for "+typed+"?"); // change typed to value where necessary
+
+            // Set the value, creating a new option if necessary
+            if ($('#payment_type').find("option[value='" + typed + "']").length) {
+                $('#payment_type').val(typed).trigger('change');
+            } else {
+                // Create a DOM Option and pre-select by default
+
+                var newOption = new Option(typed, typed, true, true);
+                // Append it to the select
+                $('#payment_type').append(newOption).trigger('change');
             }
         }
     });
