@@ -31,6 +31,13 @@
                         <span>Manage Package</span>
                     </a>
                 </li>
+
+                <li class="{{ ($currentRoute === 'citizen.index') || ($currentRoute === 'citizen.create') || ($currentRoute === 'citizen.edit') ? 'active' : '' }}">
+                    <a href="{{ route('citizen.index') }}">
+                        <i class="fe fe-users"></i>
+                        <span>Manage Citizen</span>
+                    </a>
+                </li>
                 @endif
 
             </ul>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\PackageTypeController;
 use App\Http\Controllers\Backend\PackageController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\CitizenController;
 
 // ========== Frontend
 use App\Http\Controllers\Frontend\Auth\RegisterController AS CitizenRegisterController;
@@ -63,7 +64,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
     Route::resource('admin', AdminController::class);
 
     // ==== Manage Citizen
-    // Route::resource('citizen', CitizenController::class);
+    Route::resource('citizen', CitizenController::class);
 
 });
 
