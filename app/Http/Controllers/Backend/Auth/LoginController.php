@@ -27,7 +27,8 @@ class LoginController extends Controller
         $remember_me = $request->has('remember_token')? true : false;
 
         if (Auth::guard('web')->attempt($credentials, $remember_me)) {
-            Session::put('email', $request->input('email'));
+            Session::put('id', $request->input('id'));
+            Session::put('user_type', $request->input('user_type'));
 
             return redirect()->route('admin.dashboard')->with('message', 'You are login Successfully.');
         }

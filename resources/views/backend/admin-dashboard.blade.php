@@ -38,26 +38,7 @@
         <!-- /Page Header -->
 
         <div class="row">
-            {{-- Total Expenses --}}
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card">
-                    <div class="card-body border shadow">
-                        <div class="dash-widget-header">
-                            <span class="dash-widget-icon bg-1">
-                                <img src="{{ asset('assets/img/indian_rupees_curancy.png') }}" alt="">
-                                {{-- <i class="fa fa-rupee-sign"></i> --}}
-                            </span>
-                            <div class="dash-count">
-                                <div class="dash-title text-dark">Total Expenses</div>
-                                <div class="dash-counts text-dark">
-                                    <p>0</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            @if(Auth::user()->user_type == 1 )
             {{-- Total Agents Count --}}
             <div class="col-xl-3 col-sm-6 col-12">
                 <div class="card">
@@ -67,9 +48,9 @@
                                 <i class="fas fa-user"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Agents</div>
+                                <div class="dash-title text-dark">Total Admin</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>{{ $totalAdmin }}</p>
                                 </div>
                             </div>
                         </div>
@@ -86,9 +67,9 @@
                                 <i class="fas fa-users"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Direct Customer</div>
+                                <div class="dash-title text-dark">Total Citizen</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>{{ $totalCitizen }}</p>
                                 </div>
                             </div>
                         </div>
@@ -96,25 +77,27 @@
                 </div>
             </div>
 
-            {{-- Total Policy Count --}}
+            @elseif(Auth::user()->user_type == 2)
+            {{-- Total Retailer Count --}}
             <div class="col-xl-3 col-sm-6 col-12">
                 <div class="card">
                     <div class="card-body border shadow">
                         <div class="dash-widget-header">
-                            <span class="dash-widget-icon bg-3">
-                                <img src="{{ asset('assets/img/Policy.png') }}" alt="">
-                                {{-- <i class="fas fa-file-alt"></i> --}}
+                            <span class="dash-widget-icon bg-2">
+                                <i class="fas fa-users"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Policy</div>
+                                <div class="dash-title text-dark">Total Citizen</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>{{ $totalCitizen }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @endif
+
         </div>
 
     </div>

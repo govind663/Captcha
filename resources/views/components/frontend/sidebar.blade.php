@@ -10,8 +10,7 @@
                     </a>
                 </li>
 
-                @if(Auth::user()->user_type == '1')
-                @elseif (Auth::user()->user_type == '2')
+                @if(Auth::user()->user_type == '3')
                 @endif
 
             </ul>
