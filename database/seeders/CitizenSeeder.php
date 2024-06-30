@@ -17,11 +17,15 @@ class CitizenSeeder extends Seeder
     {
         DB::table('citizens')->insert([
             'name' => 'Abhishek G Jha',
-            'user_type' => 'Jha',
+            'user_type' => '3',
+            'mobile_no' => '9004763926',
             'email' => 'abhishek.j.456@gmail.com',
-            'password' => Hash::make('1234567890'),
-            'inserted_by' => 1,
-            'inserted_dt' => Carbon::now(),
+            'password' => Hash::make('Coding_Thunder@123'),
+            'user_id' => 2,
+            'package_id' => 1,
+            'payment_type' => 1,
+            'created_by' => 1,
+            'created_at' => Carbon::now(),
         ]);
     }
 }

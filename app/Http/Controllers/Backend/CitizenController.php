@@ -19,7 +19,7 @@ class CitizenController extends Controller
      */
     public function index()
     {
-        $citizens = Citizen::orderBy("id","desc")->where('user_type', 3 )->whereNull('deleted_at')->get();
+        $citizens = Citizen::with('user', 'package')->orderBy("id","desc")->where('user_type', 3 )->whereNull('deleted_at')->get();
         return view('backend.master.citizens.index', ['citizens' => $citizens]);
     }
 
