@@ -42,7 +42,7 @@ class CitizenController extends Controller
         $request->validated();
         try {
             $data = new Citizen();
-            $data->user_type = $request->get('user_type');
+            $data->user_type = 3;
             $data->name = $request->get('name');
             $data->email = $request->get('email');
             $data->mobile_no = $request->get('mobile_no');
@@ -94,7 +94,7 @@ class CitizenController extends Controller
         $request->validated();
         try {
             $data = Citizen::find($id);
-            $data->user_type = $request->get('user_type');
+            $data->user_type = 3;
             $data->name = $request->get('name');
             $data->email = $request->get('email');
             $data->mobile_no = $request->get('mobile_no');

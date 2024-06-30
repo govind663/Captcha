@@ -45,4 +45,10 @@ class HomeController extends Controller
 
             return back()->with("message", "Password changed successfully!");
     }
+
+    // ===== viewProfile
+    public function viewProfile(string $id){
+        $citizen = Citizen::with('user', 'package')->find($id);
+        return view('frontend.auth.profile',['citizen'=>$citizen]);
+    }
 }

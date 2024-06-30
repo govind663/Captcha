@@ -89,4 +89,7 @@ Route::group(['prefix' => 'citizen','middleware' => ['auth:citizen', PreventBack
     Route::get('/change-password', [CitizenHomeController::class, 'changePassword'])->name('citizen.change-password');
     Route::post('/change-password', [CitizenHomeController::class, 'updatePassword'])->name('citizen.update-password');
 
+    // ==== View Citizen Profile
+    Route::get('/profile/view/{id?}', [CitizenHomeController::class, 'viewProfile'])->name('citizen.profile.view');
+
 });

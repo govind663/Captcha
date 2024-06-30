@@ -126,23 +126,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <div class="form-group mb-3" >
-                                            <label><b class="text-dark">User Type : <span class="text-danger">*</span></b></label>
-                                            <select class="form-control @error('user_type') is-invalid @enderror select2" id="user_type" name="user_type">
-                                                <option value="">Select User Type</option>
-                                                <option value="1" {{ ($citizen->user_type == '1' ? "selected":"") }}>Super Admin</option>
-                                                <option value="2" {{ ($citizen->user_type == '2' ? "selected":"") }}>Admin</option>
-                                                <option value="3" {{ ($citizen->user_type == '3' ? "selected":"") }}>Citizen</option>
-                                            </select>
-                                            @error('user_type')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                             <div class="add-customer-btns text-start">

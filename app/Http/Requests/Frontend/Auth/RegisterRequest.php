@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
         if ($this->id){
             $rule = [
                 'name' => 'required|string|min:4|max:255',
-                'user_type' =>'required|numeric|max:255',
+                'user_type' =>'nullable|numeric|max:255',
                 'email' => 'required|string|email|max:255|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
                 'mobile_no' => 'required|numeric',
                 'user_id' => 'required|numeric',
@@ -34,7 +34,7 @@ class RegisterRequest extends FormRequest
         }else{
             $rule = [
                 'name' => 'required|string|min:4|max:255',
-                'user_type' =>'required|numeric|max:255',
+                'user_type' =>'nullable|numeric|max:255',
                 'email' => 'required|string|email|max:255|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
                 'mobile_no' => 'required|numeric',
                 'user_id' => 'required|numeric',

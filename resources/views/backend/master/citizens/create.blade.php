@@ -46,23 +46,6 @@ Citizen | Add
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
-                                            <div class="form-group mb-3" >
-                                                <label><b class="text-dark">User Type : <span class="text-danger">*</span></b></label>
-                                                <select class="form-control @error('user_type') is-invalid @enderror select2" id="user_type" name="user_type">
-                                                    <option value="">Select User Type</option>
-                                                    {{-- <option value="1" {{ (old("user_type") == '1' ? "selected":"") }}>Super Admin</option>
-                                                    <option value="2" {{ (old("user_type") == '2' ? "selected":"") }}>Admin</option> --}}
-                                                    <option value="3" {{ (old("user_type") == '3' ? "selected":"") }}>Citizen</option>
-                                                </select>
-                                                @error('user_type')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Email Id : <span class="text-danger">*</span></b></label>
                                                 <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Enter Email Id">
@@ -170,7 +153,7 @@ Citizen | Add
                                     </div>
                                 </div>
                                 <div class="add-customer-btns text-start">
-                                    <a href="{{ route('admin.index') }}" class="btn btn-danger">Cancel</a>
+                                    <a href="{{ route('citizen.index') }}" class="btn btn-danger">Cancel</a>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </form>
