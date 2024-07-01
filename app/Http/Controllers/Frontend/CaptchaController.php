@@ -12,7 +12,7 @@ class CaptchaController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.captcha.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class CaptchaController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.captcha.create');
     }
 
     /**
@@ -44,7 +44,6 @@ class CaptchaController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -61,5 +60,10 @@ class CaptchaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    // getCaptcha
+    public function getCaptcha($type = 'default'){
+        return response()->json(captcha_src($type));
     }
 }

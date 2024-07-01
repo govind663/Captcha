@@ -11,7 +11,7 @@ class CaptchaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,23 @@ class CaptchaRequest extends FormRequest
      */
     public function rules(): array
     {
+
+        if ($this->id){
+            $rule = [
+                'captcha' => 'required|captcha',
+            ];
+        }else{
+            $rule = [
+                'captcha' => 'required|captcha',
+            ];
+        }
+        return $rule;
+    }
+
+    public function messages(){
         return [
-            //
+            'captcha.required' => 'Please verify the captcha to proceed.',
+            'captcha.captcha' => 'The captcha is incorrect.',
         ];
     }
 }
