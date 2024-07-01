@@ -25,6 +25,7 @@ class PackageRequest extends FormRequest
             $rule = [
                 'name' => 'required|string|max:255',
                 'package_type_id' => 'required|numeric',
+                'captcha_type_id' => 'required|string',
                 'description' => 'required|string',
                 'amount' => 'required|numeric',
                 'image' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -33,6 +34,7 @@ class PackageRequest extends FormRequest
             $rule = [
                 'name' => 'required|string|max:255',
                 'package_type_id' => 'required|numeric',
+                'captcha_type_id' => 'required|string',
                 'description' => 'required|string',
                 'amount' => 'required|numeric',
                 'image' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -50,6 +52,9 @@ class PackageRequest extends FormRequest
 
             'package_type_id.required' => __('Please select a package type'),
             'package_type_id.numeric' => __('The package type must be a number.'),
+
+            'captcha_type_id.required' => __('Captcha Type is required'),
+            'captcha_type_id.string' => __('The captcha type must be a string.'),
 
             'description.required' => __('Description is required'),
             'description.string' => __('The description must be a string.'),

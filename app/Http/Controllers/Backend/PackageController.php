@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\PackageRequest;
+use App\Models\CaptchaType;
 use App\Models\Package;
 use App\Models\PackageType;
 use Carbon\Carbon;
@@ -17,8 +18,9 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::with('packageType')->orderBy("id","desc")->whereNull('deleted_at')->get();
-        return view('backend.master.packages.index', ['packages' => $packages]);
+        $packages = Package::with('packageType','captchaType')->orderBy("id","desc")->whereNull('deleted_at')->get();
+
+        return view('backend.master.packages.index', ['packages' => $packages,]);
     }
 
     /**
@@ -27,7 +29,9 @@ class PackageController extends Controller
     public function create()
     {
         $packageTypes = PackageType::orderBy("id","desc")->whereNull('deleted_at')->get();
-        return view('backend.master.packages.create', ['packageTypes' => $packageTypes]);
+        $captchaTypes = CaptchaType::orderBy("id","desc")->whereNull('deleted_at')->get();
+
+        return view('backend.master.packages.create', ['packageTypes' => $packageTypes, 'captchaTypes' => $captchaTypes]);
     }
 
     /**
@@ -54,6 +58,7 @@ class PackageController extends Controller
 
             $package->name = $data['name'];
             $package->package_type_id = $data['package_type_id'];
+            $package->captcha_type_id = $data['captcha_type_id'];
             $package->description = $data['description'];
             $package->amount = $data['amount'];
             $package->inserted_at = Carbon::now();
@@ -84,7 +89,9 @@ class PackageController extends Controller
     {
         $package = Package::find($id);
         $packageTypes = PackageType::orderBy("id","desc")->whereNull('deleted_at')->get();
-        return view('backend.master.packages.edit', ['package' => $package, 'packageTypes' => $packageTypes]);
+        $captchaTypes = CaptchaType::orderBy("id","desc")->whereNull('deleted_at')->get();
+
+        return view('backend.master.packages.edit', ['package' => $package, 'packageTypes' => $packageTypes, 'captchaTypes' => $captchaTypes]);
     }
 
     /**
@@ -111,6 +118,7 @@ class PackageController extends Controller
 
             $package->name = $data['name'];
             $package->package_type_id = $data['package_type_id'];
+            $package->captcha_type_id = $data['captcha_type_id'];
             $package->description = $data['description'];
             $package->amount = $data['amount'];
             $package->modified_at = Carbon::now();

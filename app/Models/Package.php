@@ -14,6 +14,7 @@ class Package extends Model
         'id',
         'name',
         'package_type_id',
+        'captcha_type_id',
         'description',
         'amount',
         'image',
@@ -30,5 +31,10 @@ class Package extends Model
     // ==== Relationship between PackageType
     public function packageType(){
         return $this->belongsTo(PackageType::class, 'package_type_id', 'id');
+    }
+
+    // ==== Relationship between CaptchaType
+    public function captchaType(){
+        return $this->belongsTo(CaptchaType::class, 'captcha_type_id', 'id');
     }
 }

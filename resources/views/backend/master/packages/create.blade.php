@@ -34,8 +34,7 @@ Package | Add
 
                                 <div class="form-group-customer customer-additional-form">
                                     <div class="row">
-
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Package Name : <span class="text-danger">*</span></b></label>
                                                 <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Enter Package  Name">
@@ -48,7 +47,7 @@ Package | Add
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Select Package Type : <span class="text-danger">*</span></b></label>
                                                 <select  class="form-control @error('package_type_id') is-invalid @enderror select2" id="package_type_id" name="package_type_id">
@@ -65,7 +64,24 @@ Package | Add
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Select Captcha Type : <span class="text-danger">*</span></b></label>
+                                                <select  class="form-control @error('captcha_type_id') is-invalid @enderror select2" id="captcha_type_id" name="captcha_type_id">
+                                                    <option value="">Select Captcha Type</option>
+                                                    @foreach ($captchaTypes as $value )
+                                                    <option value="{{ $value->id }}" {{ (old("captcha_type_id") == $value->id ? "selected":"") }}>{{ $value->type_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('captcha_type_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Amount : <span class="text-danger">*</span></b></label>
                                                 <input type="text" id="amount" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" placeholder="Enter Amount">
@@ -109,9 +125,6 @@ Package | Add
                                                 @enderror
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
 
@@ -194,6 +207,37 @@ Package | Add
                 var newOption = new Option(typed, typed, true, true);
                 // Append it to the select
                 $('#package_type_id').append(newOption).trigger('change');
+            }
+        }
+    });
+</script>
+
+<script>
+    var typed = "";
+    $('#captcha_type_id').select2({
+        language: {
+            noResults: function(term) {
+                typed = $('.select2-search__field').val();
+            }
+        }
+
+    });
+    $('#captcha_type_id').on('select2:select', function(e) {
+        typed = ""; // clear
+    });
+    $("#but").on("click", function() {
+        if (typed) {
+            // var value = prompt("Do you have a state abbriviation for "+typed+"?"); // change typed to value where necessary
+
+            // Set the value, creating a new option if necessary
+            if ($('#captcha_type_id').find("option[value='" + typed + "']").length) {
+                $('#captcha_type_id').val(typed).trigger('change');
+            } else {
+                // Create a DOM Option and pre-select by default
+
+                var newOption = new Option(typed, typed, true, true);
+                // Append it to the select
+                $('#captcha_type_id').append(newOption).trigger('change');
             }
         }
     });

@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\CaptchaTypeController;
 use App\Http\Controllers\Frontend\Auth\RegisterController AS CitizenRegisterController;
 use App\Http\Controllers\Frontend\Auth\LoginController AS CitizenLoginController;
 use App\Http\Controllers\Frontend\HomeController AS CitizenHomeController;
+use App\Http\Controllers\Frontend\CaptchaController AS CitizenCaptchaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,5 +96,8 @@ Route::group(['prefix' => 'citizen','middleware' => ['auth:citizen', PreventBack
 
     // ==== View Citizen Profile
     Route::get('/profile/view/{id?}', [CitizenHomeController::class, 'viewProfile'])->name('citizen.profile.view');
+
+    // ===== Manage Captcha
+    Route::resource('captcha', CitizenCaptchaController::class);
 
 });

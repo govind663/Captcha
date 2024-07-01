@@ -68,6 +68,7 @@ Package | List
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Package Name</th>
+                                        <th>Captcha Type</th>
                                         <th>Package Type</th>
                                         <th>Amount</th>
                                         <th class="no-export">Edit </th>
@@ -79,6 +80,7 @@ Package | List
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $value->name }}</td>
+                                        <td>{{ $value->captchaType?->type_name }}</td>
                                         <td>{{ $value->packageType?->name }}</td>
                                         <td>{{ $value->amount }}</td>
 
