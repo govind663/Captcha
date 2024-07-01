@@ -50,7 +50,7 @@ class CitizenController extends Controller
             $data->package_id = $request->get('package_id');
             $data->payment_type = $request->get('payment_type');
             $data->password = Hash::make($request->get('password'));
-            $data->created_at = date("Y-m-d H:i:s");
+            $data->created_at = Carbon::now();
             $data->created_by = Auth::user()->id;
             $data->save();
 
@@ -101,7 +101,7 @@ class CitizenController extends Controller
             $data->user_id = $request->get('user_id');
             $data->package_id = $request->get('package_id');
             $data->payment_type = $request->get('payment_type');
-            $data->updated_at = date("Y-m-d H:i:s");
+            $data->updated_at = Carbon::now();
             $data->updated_by = Auth::user()->id;
             $data->save();
 

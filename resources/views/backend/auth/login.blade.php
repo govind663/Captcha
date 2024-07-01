@@ -43,7 +43,7 @@
         <div class="login-wrapper">
             <div class="container">
 
-                <img class="img-fluid logo-dark mb-2 logo-color" src="{{ url('/') }}/assets/img/captcha_logo.png" alt="Logo">
+                <img class="img-fluid logo-dark mb-2 logo-color" src="{{ url('/') }}/assets/img/captcha_logo.png" alt="Logo" style="max-width: 250px !important">
                 <div class="loginbox">
 
                     <div class="login-right">

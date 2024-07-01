@@ -41,7 +41,7 @@ class AdminController extends Controller
             $data->name = $request->get('name');
             $data->email = $request->get('email');
             $data->password = Hash::make($request->get('password'));
-            $data->created_at = date("Y-m-d H:i:s");
+            $data->created_at = Carbon::now();
             $data->created_by = Auth::user()->id;
             $data->save();
 
@@ -82,7 +82,7 @@ class AdminController extends Controller
             $data->user_type = $request->get('user_type');
             $data->name = $request->get('name');
             $data->email = $request->get('email');
-            $data->updated_at = date("Y-m-d H:i:s");
+            $data->updated_at = Carbon::now();
             $data->updated_by = Auth::user()->id;
             $data->save();
 

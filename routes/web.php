@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\PackageTypeController;
 use App\Http\Controllers\Backend\PackageController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CitizenController;
+use App\Http\Controllers\Backend\CaptchaTypeController;
 
 // ========== Frontend
 use App\Http\Controllers\Frontend\Auth\RegisterController AS CitizenRegisterController;
@@ -56,6 +57,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
 
     // ==== Manage Package Type
     Route::resource('package-type', PackageTypeController::class);
+
+    // ==== Manage Captcha Type
+    Route::resource('captcha-type', CaptchaTypeController::class);
 
     // ==== Manage Package
     Route::resource('package', PackageController::class);

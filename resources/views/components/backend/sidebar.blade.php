@@ -18,6 +18,13 @@
                     </a>
                 </li>
 
+                <li class="{{ ($currentRoute === 'captcha-type.index') || ($currentRoute === 'captcha-type.create') || ($currentRoute === 'captcha-type.edit') ? 'active' : '' }}">
+                    <a href="{{ route('captcha-type.index') }}">
+                        <i class="fe fe-clipboard"></i>
+                        <span>Captcha Type</span>
+                    </a>
+                </li>
+
                 <li class="{{ ($currentRoute === 'package-type.index') || ($currentRoute === 'package-type.create') || ($currentRoute === 'package-type.edit') ? 'active' : '' }}">
                     <a href="{{ route('package-type.index') }}">
                         <i class="fe fe-grid"></i>
