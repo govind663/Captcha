@@ -62,15 +62,15 @@ class CaptchaController extends Controller
         //
     }
 
-    // getCaptcha
-    // public function getCaptcha(){
-    //     // get current captcha type
-    //     $captchaType = session('captchaType');
+    // ==== getCaptcha
+    public function getCaptcha(){
+        // get current captcha type
+        $captchaType = session('captchaType');
 
-    //     // generate captcha image and store it in session
-    //     session(['captchaType' => $captchaType]);
+        // generate captcha image and store it in session
+        session(['captchaType' => $captchaType]);
 
-    //     // return captcha image as JSON response
-    //     return response()->json(['captcha'=> captcha_img($captchaType)]);
-    // }
+        // return captcha image as JSON response
+        return response()->json(['captcha'=> captcha_img($captchaType)]);
+    }
 }

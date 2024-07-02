@@ -31,27 +31,33 @@ Captcha  | Add
 
                                 <div class="form-group-customer customer-additional-form">
                                     <div class="row">
-                                        @if(Auth::user()->user_type == '3' && Auth::user()->package_type_id == 1)
+                                        @if(Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 1)
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <img src="{{ captcha_src('default') }}" id="easy-captcha" style="height: 40px !important; width:400px !important">
-                                                {{-- <button type="button" class="btn btn-primary" onclick="refreshCaptcha('easy-captcha', 'default')"><i class="fa fa-refresh"></i></button> --}}
+                                                <div class="d-flex">
+                                                    <img src="{{ captcha_src('default') }}" id="easy-captcha" style="height: 40px !important; width:400px !important; max-width: 84% !important;">&nbsp;&nbsp;
+                                                    <button type="button" class="btn btn-primary" onclick="refreshCaptcha('easy-captcha', 'default')"><i class="fa fa-refresh"></i></button>
+                                                </div>
                                                 <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
                                             </div>
                                         </div>
-                                        @elseif (Auth::user()->user_type == '3' && Auth::user()->package_type_id == 2)
+                                        @elseif (Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 2)
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <img src="{{ captcha_src('medium') }}" id="medium-captcha" style="height: 40px !important; width:400px !important">
-                                                {{-- <button type="button" class="btn btn-primary" onclick="refreshCaptcha('medium-captcha', 'medium')"><i class="fa fa-refresh"></i></button> --}}
+                                                <div class="d-flex">
+                                                    <img src="{{ captcha_src('medium') }}" id="medium-captcha" style="height: 40px !important; width:400px !important; max-width: 84% !important;">&nbsp;&nbsp;
+                                                    <button type="button" class="btn btn-primary" onclick="refreshCaptcha('medium-captcha', 'medium')"><i class="fa fa-refresh"></i></button>
+                                                </div>
                                                 <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
                                             </div>
                                         </div>
-                                        @elseif (Auth::user()->user_type == '3' && Auth::user()->package_type_id == 3)
+                                        @elseif (Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 3)
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <img src="{{ captcha_src('hard') }}" id="hard-captcha" style="height: 40px !important; width:400px !important">
-                                                {{-- <button type="button" class="btn btn-primary" onclick="refreshCaptcha('hard-captcha', 'hard')"><i class="fa fa-refresh"></i></button> --}}
+                                                <div class="d-flex">
+                                                    <img src="{{ captcha_src('hard') }}" id="hard-captcha" style="height: 40px !important; width:400px !important; max-width: 84% !important;">&nbsp;&nbsp;
+                                                    <button type="button" class="btn btn-primary" onclick="refreshCaptcha('hard-captcha', 'hard')"><i class="fa fa-refresh"></i></button>
+                                                </div>
                                                 <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
                                             </div>
                                         </div>
@@ -72,10 +78,10 @@ Captcha  | Add
 @endsection
 
 @push('scripts')
-{{-- <script>
+<script>
     function refreshCaptcha(elementId, type) {
         document.getElementById(elementId).src = "{{ url('captcha/refresh') }}?type=" + type;
         return false;
     }
-</script> --}}
+</script>
 @endpush

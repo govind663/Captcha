@@ -48,7 +48,7 @@
                                 {{-- <i class="fa fa-rupee-sign"></i> --}}
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Expenses</div>
+                                <div class="dash-title text-dark">Total Earning</div>
                                 <div class="dash-counts text-dark">
                                     <p>0</p>
                                 </div>
@@ -67,7 +67,7 @@
                                 <i class="fas fa-user"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Agents</div>
+                                <div class="dash-title text-dark">Total Right Captcha</div>
                                 <div class="dash-counts text-dark">
                                     <p>0</p>
                                 </div>
@@ -86,7 +86,7 @@
                                 <i class="fas fa-users"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Direct Customer</div>
+                                <div class="dash-title text-dark">Total Wrong Captcha</div>
                                 <div class="dash-counts text-dark">
                                     <p>0</p>
                                 </div>
@@ -106,7 +106,7 @@
                                 {{-- <i class="fas fa-file-alt"></i> --}}
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Policy</div>
+                                <div class="dash-title text-dark">Total Captcha</div>
                                 <div class="dash-counts text-dark">
                                     <p>0</p>
                                 </div>

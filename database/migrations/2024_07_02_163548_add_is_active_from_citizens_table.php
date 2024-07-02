@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\CaptchaType;
-use App\Models\PackageType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('citizens', function (Blueprint $table) {
-            $table->foreignIdFor(CaptchaType::class)->nullable()->after('name')->constrained()->cascadeOnUpdate()->nullOnDelete();
+            // add is_active column after captcha_type_id
+            $table->boolean('is_active')->default(true)->after('captcha_type_id')->comment('Inactive: 0, Active: 1');
         });
     }
 
@@ -24,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('citizens', function (Blueprint $table) {
-            $table->dropForeign(['captcha_type_id']);
-            $table->dropColumn('captcha_type_id');
+            // drop is_active column
+            $table->dropColumn('is_active');
         });
     }
 };
