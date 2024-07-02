@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\CaptchaType;
+use App\Models\Captcha;
 use App\Models\Citizen;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('captchas', function (Blueprint $table) {
+        Schema::create('captcha_counts', function (Blueprint $table) {
             $table->id();
-            // add user id as foreignIdFor
             $table->foreignIdFor(Citizen::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
-            $table->foreignIdFor(CaptchaType::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
-            $table->string('captcha_length')->nullable();
-            $table->string('captcha_code')->nullable();
-            $table->integer('is_active')->nullable()->comment('1 => Active, 0 => Deactive')->default(1);
+            $table->foreignIdFor(Captcha::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->integer('is_correct_captcha_count')->nullable()->comment('Number of correct captchas');
+            $table->integer('is_wrong_captcha_count')->nullable()->comment('Number of wrong captchas');
+            $table->integer('per_captcha_amount')->nullable();
             $table->integer('inserted_by')->nullable();
             $table->timestamp('inserted_at')->nullable();
             $table->integer('modified_by')->nullable();
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('captchas');
+        Schema::dropIfExists('captcha_counts');
     }
 };
