@@ -34,25 +34,25 @@ Captcha  | Add
                                         @if(Auth::user()->user_type == '3' && Auth::user()->package_type_id == 1)
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <input type="text" class="form-control" name="captcha">
-                                                <img src="{{ captcha_src('default') }}" id="easy-captcha">
-                                                <button type="button" class="btn btn-primary" onclick="refreshCaptcha('easy-captcha', 'default')">Refresh</button>
+                                                <img src="{{ captcha_src('default') }}" id="easy-captcha" style="height: 40px !important; width:400px !important">
+                                                {{-- <button type="button" class="btn btn-primary" onclick="refreshCaptcha('easy-captcha', 'default')"><i class="fa fa-refresh"></i></button> --}}
+                                                <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
                                             </div>
                                         </div>
                                         @elseif (Auth::user()->user_type == '3' && Auth::user()->package_type_id == 2)
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <input type="text" class="form-control" name="captcha">
-                                                <img src="{{ captcha_src('medium') }}" id="medium-captcha">
-                                                <button type="button" class="btn btn-primary" onclick="refreshCaptcha('medium-captcha', 'medium')">Refresh</button>
+                                                <img src="{{ captcha_src('medium') }}" id="medium-captcha" style="height: 40px !important; width:400px !important">
+                                                {{-- <button type="button" class="btn btn-primary" onclick="refreshCaptcha('medium-captcha', 'medium')"><i class="fa fa-refresh"></i></button> --}}
+                                                <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
                                             </div>
                                         </div>
                                         @elseif (Auth::user()->user_type == '3' && Auth::user()->package_type_id == 3)
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <input type="text" class="form-control" name="captcha">
-                                                <img src="{{ captcha_src('hard') }}" id="hard-captcha">
-                                                <button type="button" class="btn btn-primary" onclick="refreshCaptcha('hard-captcha', 'hard')">Refresh</button>
+                                                <img src="{{ captcha_src('hard') }}" id="hard-captcha" style="height: 40px !important; width:400px !important">
+                                                {{-- <button type="button" class="btn btn-primary" onclick="refreshCaptcha('hard-captcha', 'hard')"><i class="fa fa-refresh"></i></button> --}}
+                                                <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
                                             </div>
                                         </div>
                                         @endif
@@ -72,13 +72,10 @@ Captcha  | Add
 @endsection
 
 @push('scripts')
-<script>
+{{-- <script>
     function refreshCaptcha(elementId, type) {
-        fetch(`/captcha/${type}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById(elementId).src = data;
-            });
+        document.getElementById(elementId).src = "{{ url('captcha/refresh') }}?type=" + type;
+        return false;
     }
-</script>
+</script> --}}
 @endpush

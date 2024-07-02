@@ -99,6 +99,6 @@ Route::group(['prefix' => 'citizen','middleware' => ['auth:citizen', PreventBack
 
     // ===== Manage Captcha
     Route::resource('captcha', CitizenCaptchaController::class);
-    Route::get('captcha/{type?}', [CitizenCaptchaController::class, 'getCaptcha'])->name('captcha.type');
+    // Route::get('captcha/refresh/{type?}', [CitizenCaptchaController::class, 'getCaptcha'])->name('captcha.type');
 
 });
