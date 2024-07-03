@@ -68,18 +68,50 @@ Manage Captcha | List
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
+                                        <th>User Name</th>
                                         <th>Captcha Type</th>
+                                        <th>Captcha Code</th>
+                                        <th>Captcha Length</th>
+                                        <th>Right Captcha</th>
+                                        <th>Wrong Captcha</th>
+                                        <th>Total Captcha</th>
+                                        <th>Total Earning</th>
                                         <th class="no-export">Edit </th>
                                         <th class="no-export">Delete </th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($captcha as $key=>$value )
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <td>{{ ++$key }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="no-export">
+                                            <a href="{{ route('captcha.edit', $value->id) }}">
+                                                <button class="btn btn-warning btn-sm text-dark">
+                                                    <i class="far fa-edit"></i>
+                                                </button>
+                                            </a>
+                                        </td>
+
+                                        <td class="no-export">
+                                            <form action="{{ route('captcha.destroy', $value->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

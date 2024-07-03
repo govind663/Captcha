@@ -23,13 +23,18 @@ return [
 
     ],
     'hard' => [
-        'length' => 12,
+        'length' => 8,
         'width' => 180,
         'height' => 46,
         'quality' => 90,
         'math' => false,
         'expire' => 900,
         'encrypt' => true,
+        'bgImage' => true,
+        'bgColor' => '#ecf2f4',
+        'contrast' => -3,
+        'fontSize' => 14,
+        'blur' => 2,
     ],
     'math' => [
         'length' => 9,

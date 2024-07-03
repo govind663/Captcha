@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->foreignIdFor(PackageType::class)->nullable()->index();
             $table->text('description')->nullable();
-            $table->integer('amount')->nullable();
+            $table->string('amount')->nullable();
             $table->string('image')->nullable();
             $table->integer('inserted_by')->nullable();
             $table->timestamp('inserted_at')->nullable();

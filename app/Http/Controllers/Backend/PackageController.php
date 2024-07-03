@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\PackageRequest;
 use App\Models\CaptchaType;
-use App\Models\Citizen;
 use App\Models\Package;
 use App\Models\PackageType;
 use Carbon\Carbon;
@@ -65,11 +64,6 @@ class PackageController extends Controller
             $package->inserted_at = Carbon::now();
             $package->inserted_by = Auth::user()->id;
             $package->save();
-
-            $update = [
-                'captcha_type_id' => $package->captcha_type_id,
-            ];
-            Citizen::where('id', $package->id)->update($update);
 
             return redirect()->route('package.index')->with('message','Package Created Successfully');
 

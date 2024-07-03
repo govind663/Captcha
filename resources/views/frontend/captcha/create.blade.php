@@ -26,49 +26,88 @@ Captcha  | Add
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form method="POST" action="{{ route('captcha.store') }}" enctype="multipart/form-data">
-                                @csrf
-
-                                <div class="form-group-customer customer-additional-form">
-                                    <div class="row">
-                                        @if(Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 1)
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group-customer customer-additional-form">
+                                <div class="row">
+                                    @if(Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 1)
+                                    <form method="POST" action="{{ route('captcha.store') }}" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <div class="d-flex">
-                                                    <img src="{{ captcha_src('default') }}" id="easy-captcha" style="height: 40px !important; width:400px !important; max-width: 84% !important;">&nbsp;&nbsp;
+                                                    <img src="{{ captcha_src('default') }}" id="easy-captcha" style="height: 70px !important; width:491px !important; max-width: 90% !important;">&nbsp;&nbsp;
                                                     <button type="button" class="btn btn-primary" onclick="refreshCaptcha('easy-captcha', 'default')"><i class="fa fa-refresh"></i></button>
                                                 </div>
-                                                <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
+                                                <br>
+
+                                                <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
+                                                <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="7" >
+                                                <input type="text" class="form-control  @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
+                                                @error('captcha_code')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
-                                        @elseif (Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 2)
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="add-customer-btns text-start">
+                                            <a href="{{ route('captcha.index') }}" class="btn btn-danger">Cancel</a>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </form>
+                                    @elseif (Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 2)
+                                    <form method="POST" action="{{ route('captcha.store') }}" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <div class="d-flex">
-                                                    <img src="{{ captcha_src('medium') }}" id="medium-captcha" style="height: 40px !important; width:400px !important; max-width: 84% !important;">&nbsp;&nbsp;
+                                                    <img src="{{ captcha_src('medium') }}" id="medium-captcha" style="height: 70px !important; width:491px !important; max-width: 90% !important;">&nbsp;&nbsp;
                                                     <button type="button" class="btn btn-primary" onclick="refreshCaptcha('medium-captcha', 'medium')"><i class="fa fa-refresh"></i></button>
                                                 </div>
-                                                <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
+                                                <br>
+
+                                                <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
+                                                <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="8" >
+                                                <input type="text" class="form-control @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
+                                                @error('captcha_code')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
-                                        @elseif (Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 3)
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="add-customer-btns text-start">
+                                            <a href="{{ route('captcha.index') }}" class="btn btn-danger">Cancel</a>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </form>
+                                    @elseif (Auth::user()->user_type == '3' && Auth::user()->captcha_type_id == 3)
+                                    <form method="POST" action="{{ route('captcha.store') }}" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <div class="d-flex">
-                                                    <img src="{{ captcha_src('hard') }}" id="hard-captcha" style="height: 40px !important; width:400px !important; max-width: 84% !important;">&nbsp;&nbsp;
+                                                    <img src="{{ captcha_src('hard') }}" id="hard-captcha" style="height: 70px !important; width:491px !important; max-width: 90% !important;">&nbsp;&nbsp;
                                                     <button type="button" class="btn btn-primary" onclick="refreshCaptcha('hard-captcha', 'hard')"><i class="fa fa-refresh"></i></button>
                                                 </div>
-                                                <input type="text" class="form-control" name="captcha" id="captcha" value="{{ old('captcha') }}" >
+                                                <br>
+                                                <input type="text" class="form-control @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
+                                                <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
+                                                <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="8" >
+                                                @error('captcha_code')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
-                                        @endif
-                                    </div>
+                                        <div class="add-customer-btns text-start">
+                                            <a href="{{ route('captcha.index') }}" class="btn btn-danger">Cancel</a>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </form>
+                                    @endif
                                 </div>
-                                <div class="add-customer-btns text-start">
-                                    <a href="{{ route('captcha.index') }}" class="btn btn-danger">Cancel</a>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,8 +119,13 @@ Captcha  | Add
 @push('scripts')
 <script>
     function refreshCaptcha(elementId, type) {
-        document.getElementById(elementId).src = "{{ url('captcha/refresh') }}?type=" + type;
-        return false;
+        fetch(`/captcha/${type}`)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                document.getElementById(elementId).src = url;
+            })
+            .catch(error => console.error('Error refreshing captcha:', error));
     }
 </script>
 @endpush

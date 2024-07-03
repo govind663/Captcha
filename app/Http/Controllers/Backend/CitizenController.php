@@ -54,6 +54,16 @@ class CitizenController extends Controller
             $data->created_by = Auth::user()->id;
             $data->save();
 
+            // === get Captch Type by using package_id
+            $package = Package::find($data->package_id);
+
+            if($package->captcha_type_id == $data->package_id){
+                $update = [
+                    'captcha_type_id' => Package::first()->captcha_type_id,
+                ];
+                Citizen::where('id', $data->id)->update($update);
+            }
+
             return redirect()->route('citizen.index')->with('message','Citizen Created Successfully');
 
         } catch(\Exception $ex){
@@ -104,6 +114,16 @@ class CitizenController extends Controller
             $data->updated_at = Carbon::now();
             $data->updated_by = Auth::user()->id;
             $data->save();
+
+            // === get Captch Type by using package_id
+            $package = Package::find($data->package_id);
+
+            if($package->captcha_type_id == $data->package_id){
+                $update = [
+                    'captcha_type_id' => Package::first()->captcha_type_id,
+                ];
+                Citizen::where('id', $data->id)->update($update);
+            }
 
             return redirect()->route('citizen.index')->with('message','Citizen Updated Successfully');
 
