@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('captcha_counts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Citizen::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
-            $table->foreignIdFor(Captcha::class)->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignIdFor(Citizen::class)->nullable()->index();
+            $table->foreignIdFor(Captcha::class)->nullable()->index();
             $table->integer('is_correct_captcha_count')->nullable()->comment('Number of correct captchas');
             $table->integer('is_wrong_captcha_count')->nullable()->comment('Number of wrong captchas');
             $table->integer('per_captcha_amount')->nullable();

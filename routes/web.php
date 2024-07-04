@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\Auth\RegisterController AS CitizenRegisterCont
 use App\Http\Controllers\Frontend\Auth\LoginController AS CitizenLoginController;
 use App\Http\Controllers\Frontend\HomeController AS CitizenHomeController;
 use App\Http\Controllers\Frontend\CaptchaController AS CitizenCaptchaController;
+use App\Http\Controllers\Frontend\CitizenPaymentController AS CitizensPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,5 +101,8 @@ Route::group(['prefix' => 'citizen','middleware' => ['auth:citizen', PreventBack
     // ===== Manage Captcha
     Route::resource('captcha', CitizenCaptchaController::class);
     Route::get('captcha/{type?}', [CitizenCaptchaController::class, 'getCaptcha'])->name('captcha.type');
+
+    // ==== Manage Payment Request
+    Route::resource('payment-request', CitizensPaymentController::class);
 
 });

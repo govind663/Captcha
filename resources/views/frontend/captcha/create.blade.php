@@ -41,7 +41,7 @@ Captcha  | Add
                                                 <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
                                                 <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="7" >
                                                 <input type="text" hidden class="form-control" id="package_id" name="package_id" value="{{ Auth::user()->package_id }}" >
-                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="{{ $packageAmt }}" >
+                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="" >
                                                 <input type="text" class="form-control  @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
                                                 @error('captcha_code')
                                                     <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@ Captcha  | Add
                                                 <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
                                                 <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="8" >
                                                 <input type="text" hidden class="form-control" id="package_id" name="package_id" value="{{ Auth::user()->package_id }}" >
-                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="{{ $packageAmt }}" >
+                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="" >
                                                 <input type="text" class="form-control @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
                                                 @error('captcha_code')
                                                     <span class="invalid-feedback" role="alert">
@@ -96,7 +96,7 @@ Captcha  | Add
                                                 <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
                                                 <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="8" >
                                                 <input type="text" hidden class="form-control" id="package_id" name="package_id" value="{{ Auth::user()->package_id }}" >
-                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="{{ $packageAmt }}" >
+                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="" >
                                                 <input type="text" class="form-control @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
                                                 @error('captcha_code')
                                                     <span class="invalid-feedback" role="alert">
