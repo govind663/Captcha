@@ -56,6 +56,7 @@ class CaptchaRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
+        //  increment wrong count
         $this->incrementCaptchaCount(false);
 
         throw new ValidationException($validator);
@@ -63,17 +64,24 @@ class CaptchaRequest extends FormRequest
 
     protected function incrementCaptchaCount(bool $isWrong)
     {
-        if ($isWrong) {
-            //  create new wrong Count
-            $wrongCount = new CaptchaCount();
-            $wrongCount->citizen_id = Auth::user()->id;
-            $wrongCount->captcha_id = null;
-            $wrongCount->is_wrong_captcha_count = 1;
-            $wrongCount->is_correct_captcha_count = 0;
-            $wrongCount->per_captcha_amount = 0;
-            $wrongCount->inserted_at = Carbon::now();
-            $wrongCount->inserted_by = Auth::user()->id;
+        //  get wrong count
+        $wrongCount = CaptchaCount::where('citizen_id', Auth::user()->id)->first();
+        if ($wrongCount) {
+            if ($isWrong) {
+                $wrongCount->is_wrong_captcha_count = $wrongCount->is_wrong_captcha_count + 1;
+            } else {
+                $wrongCount->is_wrong_captcha_count = $wrongCount->is_wrong_captcha_count + 1;
+            }
             $wrongCount->save();
+        } else {
+            CaptchaCount::create([
+                'citizen_id' => Auth::user()->id,
+                'is_wrong_captcha_count' => $isWrong ? 0 : 1, //  if correct then 1 else 0
+                'inserted_at' => Carbon::now(),
+                'inserted_by' => Auth::user()->id,
+
+            ]);
         }
+
     }
 }

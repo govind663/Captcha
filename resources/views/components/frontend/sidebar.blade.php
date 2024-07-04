@@ -11,10 +11,10 @@
                 </li>
 
                 @if(Auth::user()->user_type == '3')
-                <li class="{{ ($currentRoute === 'captcha.index') || ($currentRoute === 'captcha.create') || ($currentRoute === 'captcha.edit') ? 'active' : '' }}">
-                    <a href="{{ route('captcha.index') }}">
+                <li class="{{ ($currentRoute === 'captcha.create')  ? 'active' : '' }}">
+                    <a href="{{ route('captcha.create') }}">
                         <i class="fe fe-clipboard"></i>
-                        <span>Manage Captcha</span>
+                        <span>Captcha</span>
                     </a>
                 </li>
                 @endif

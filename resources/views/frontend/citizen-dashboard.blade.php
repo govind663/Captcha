@@ -50,7 +50,7 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Earning</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>{{ totalCaptchaAmount }}</p>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Right Captcha</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>{{ $rightCaptchaCount }}</p>
                                 </div>
                             </div>
                         </div>
@@ -88,13 +88,14 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Wrong Captcha</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>{{ $wrongCaptchaCount }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             {{-- Total Policy Count --}}
             <div class="col-xl-3 col-sm-6 col-12">
@@ -108,7 +109,11 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Captcha</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    @php
+                                        $totalCaptcha = $rightCaptchaCount + $wrongCaptchaCount;
+                                        // echo $totalCaptcha;
+                                    @endphp
+                                    <p>{{ $totalCaptcha }}</p>
                                 </div>
                             </div>
                         </div>

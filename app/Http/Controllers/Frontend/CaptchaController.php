@@ -17,7 +17,9 @@ class CaptchaController extends Controller
      */
     public function index()
     {
-        $captcha = Captcha::with('citizen', 'captchaType')->orderBy("id","desc")->whereNull('deleted_at')->get();
+        $captcha = Captcha::with('citizen', 'captchaType')->where('citizen_id', Auth::user()->id)->orderBy("id","desc")->whereNull('deleted_at')->get();
+        $captchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->first();
+
         return view('frontend.captcha.index', ['captcha' => $captcha]);
     }
 
@@ -47,17 +49,28 @@ class CaptchaController extends Controller
             $captcha->inserted_by = Auth::user()->id;
             $captcha->save();
 
-            CaptchaCount::create([
-                'citizen_id' => Auth::user()->id,
-                'captcha_id' => $captcha->id,
-                'is_wrong_captcha_count' => 0,
-                'is_correct_captcha_count' => 1,
-                'per_captcha_amount' => 2.75,
-                'inserted_at' => Carbon::now(),
-                'inserted_by' => Auth::user()->id,
-            ]);
+            // update captcha count
+            $captchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->first();
+            if($captchaCount){
+                $captchaCount->captcha_id = $captcha->id;
+                $captchaCount->is_correct_captcha_count = $captchaCount->is_correct_captcha_count + 1;
+                $captchaCount->per_captcha_amount += $captchaCount->per_captcha_amount;
+                $captchaCount->modified_at = Carbon::now();
+                $captchaCount->modified_by = Auth::user()->id;
+                $captchaCount->save();
+            }else{
+                CaptchaCount::create([
+                    'citizen_id' => Auth::user()->id,
+                    'captcha_id' => $captcha->id,
+                    'is_wrong_captcha_count' => 0,
+                    'is_correct_captcha_count' => 1,
+                    'per_captcha_amount' => 2.75,
+                    'inserted_at' => Carbon::now(),
+                    'inserted_by' => Auth::user()->id,
+                ]);
+            }
 
-            return redirect()->route('captcha.index')->with('message','Captcha Added Successfully');
+            return redirect()->route('citizen.dashboard')->with('message','Captcha has been successfully added to your system.');
 
         } catch(\Exception $ex){
 

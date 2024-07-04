@@ -3,14 +3,30 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CaptchaCount;
 use App\Models\Citizen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function Citizen_Home(){
-        return view('frontend.citizen-dashboard');
+
+        // ==== total captcha amount
+        $totalCaptchaAmount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('per_captcha_amount')->first();
+        // ==== wrongCaptchaCount
+        $rightCaptchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('is_correct_captcha_count')->first();
+
+        // ==== wrongCaptchaCount
+        $wrongCaptchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('is_wrong_captcha_count')->first();
+
+        return view('frontend.citizen-dashboard',
+        [
+            'totalCaptchaAmount'=> $totalCaptchaAmount,
+            'wrongCaptchaCount'=> $wrongCaptchaCount,
+            'rightCaptchaCount'=> $rightCaptchaCount
+        ]);
     }
 
     public function changePassword(Request $request)
