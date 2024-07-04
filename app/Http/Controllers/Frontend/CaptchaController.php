@@ -126,4 +126,5 @@ class CaptchaController extends Controller
     public function getCaptcha($type = 'default'){
         return response(captcha_src($type))->header('Content-Type', 'image/png');
     }
+
 }

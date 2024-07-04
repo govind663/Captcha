@@ -23,7 +23,6 @@ Captcha  | Add
                             <h5>Add Captcha </h5>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group-customer customer-additional-form">
@@ -41,6 +40,8 @@ Captcha  | Add
 
                                                 <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
                                                 <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="7" >
+                                                <input type="text" hidden class="form-control" id="package_id" name="package_id" value="{{ Auth::user()->package_id }}" >
+                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="{{ $packageAmt }}" >
                                                 <input type="text" class="form-control  @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
                                                 @error('captcha_code')
                                                     <span class="invalid-feedback" role="alert">
@@ -67,6 +68,8 @@ Captcha  | Add
 
                                                 <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
                                                 <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="8" >
+                                                <input type="text" hidden class="form-control" id="package_id" name="package_id" value="{{ Auth::user()->package_id }}" >
+                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="{{ $packageAmt }}" >
                                                 <input type="text" class="form-control @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
                                                 @error('captcha_code')
                                                     <span class="invalid-feedback" role="alert">
@@ -90,9 +93,11 @@ Captcha  | Add
                                                     <button type="button" class="btn btn-primary" onclick="refreshCaptcha('hard-captcha', 'hard')"><i class="fa fa-refresh"></i></button>
                                                 </div>
                                                 <br>
-                                                <input type="text" class="form-control @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
                                                 <input type="text" hidden class="form-control" id="captcha_type_id" name="captcha_type_id" value="{{ Auth::user()->captcha_type_id }}" >
                                                 <input type="text" hidden class="form-control" id="captcha_length" name="captcha_length" value="8" >
+                                                <input type="text" hidden class="form-control" id="package_id" name="package_id" value="{{ Auth::user()->package_id }}" >
+                                                <input type="text" hidden class="form-control" id="package_amt" name="package_amt" value="{{ $packageAmt }}" >
+                                                <input type="text" class="form-control @error('captcha_code') is-invalid @enderror" name="captcha_code" id="captcha_code" value="{{ old('captcha_code') }}" >
                                                 @error('captcha_code')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

@@ -50,7 +50,7 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Earning</div>
                                 <div class="dash-counts text-dark">
-                                    <p>{{ totalCaptchaAmount }}</p>
+                                    <p>0</p>
                                 </div>
                             </div>
                         </div>
