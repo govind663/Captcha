@@ -52,9 +52,14 @@ class CaptchaController extends Controller
             // update captcha count
             $captchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->first();
             if($captchaCount){
+                $currentCaptchaCount = 0;
                 $captchaCount->captcha_id = $captcha->id;
                 $captchaCount->is_correct_captcha_count = $captchaCount->is_correct_captcha_count + 1;
-                $captchaCount->per_captcha_amount += $captchaCount->per_captcha_amount;
+
+                // update per_captcha_amount based on package_amt if available
+                $captchaCount->per_captcha_amount = $request->package_amt ? $captchaCount->per_captcha_amount + $request->package_amt : $captchaCount->per_captcha_amount;
+
+
                 $captchaCount->modified_at = Carbon::now();
                 $captchaCount->modified_by = Auth::user()->id;
                 $captchaCount->save();
@@ -64,7 +69,7 @@ class CaptchaController extends Controller
                     'captcha_id' => $captcha->id,
                     'is_wrong_captcha_count' => 0,
                     'is_correct_captcha_count' => 1,
-                    'per_captcha_amount' => 2.75,
+                    'per_captcha_amount' => $captcha->package_amt ? $captcha->package_amt : 0,
                     'inserted_at' => Carbon::now(),
                     'inserted_by' => Auth::user()->id,
                 ]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Captcha;
 use App\Models\CaptchaCount;
 use App\Models\Citizen;
 use Illuminate\Http\Request;
@@ -12,21 +13,24 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function Citizen_Home(){
+        // ==== total Earning
+        $totalEarning = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('per_captcha_amount')->first();
 
-        // ==== total captcha amount
-        $totalCaptchaAmount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('per_captcha_amount')->first();
-
-        // ==== rightCaptchaCount
+        // ==== total right captcha count
         $rightCaptchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('is_correct_captcha_count')->first();
 
-        // ==== wrongCaptchaCount
+        // ==== total wrong captcha count
         $wrongCaptchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('is_wrong_captcha_count')->first();
+
+        // ==== total captcha count
+        $totalCaptchaCount = Captcha::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->count('id');
 
         return view('frontend.citizen-dashboard',
         [
-            'totalCaptchaAmount'=> $totalCaptchaAmount,
+            'totalEarning'=> $totalEarning,
             'wrongCaptchaCount'=> $wrongCaptchaCount,
-            'rightCaptchaCount'=> $rightCaptchaCount
+            'rightCaptchaCount'=> $rightCaptchaCount,
+            'totalCaptchaCount'=> $totalCaptchaCount
         ]);
     }
 

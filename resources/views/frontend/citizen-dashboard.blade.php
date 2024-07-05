@@ -50,7 +50,7 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Earning</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>{{ $totalEarning ? $totalEarning : 0 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -109,11 +109,7 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Captcha</div>
                                 <div class="dash-counts text-dark">
-                                    @php
-                                        $totalCaptcha = $rightCaptchaCount + $wrongCaptchaCount;
-                                        // echo $totalCaptcha;
-                                    @endphp
-                                    <p>{{ $totalCaptcha }}</p>
+                                   <p>{{ $totalCaptchaCount ? $totalCaptchaCount : 0 }}</p>
                                 </div>
                             </div>
                         </div>
