@@ -17,6 +17,12 @@
                         <span>Captcha</span>
                     </a>
                 </li>
+                <li class="{{ ($currentRoute === 'payment-request.index') || ($currentRoute === 'payment-request.create') || ($currentRoute === 'payment-request.edit') ? 'active' : '' }}">
+                    <a href="{{ route('payment-request.index') }}">
+                        <i class="fe fe-settings"></i>
+                        <span>Payment Request</span>
+                    </a>
+                </li>
                 @endif
 
             </ul>

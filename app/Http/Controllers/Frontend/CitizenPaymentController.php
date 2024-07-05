@@ -31,9 +31,40 @@ class CitizenPaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CitizenPaymentRequest $request)
     {
-        //
+        $request->validated();
+        try {
+
+            $paymentRequest = new CitizenPayment();
+            $paymentRequest->citizen_id = $request->citizen_id;
+            $paymentRequest->email = $request->email;
+            $paymentRequest->amount = $request->amount;
+            $paymentRequest->bank_name = $request->bank_name;
+            $paymentRequest->branch_name = $request->branch_name;
+            $paymentRequest->account_holder_name = $request->account_holder_name;
+            $paymentRequest->account_number = $request->account_number;
+            $paymentRequest->ifsc_code = $request->ifsc_code;
+            $paymentRequest->payment_mode = $request->payment_mode;
+            $paymentRequest->transaction_date = date("Y-m-d", strtotime($request->transaction_date));
+            $paymentRequest->transaction_time = date("H:i", strtotime($request->transaction_time));
+            $paymentRequest->inserted_at = Carbon::now();
+            $paymentRequest->inserted_by = Auth::user()->id;
+            $paymentRequest->save();
+
+            // Generate Transaction Id             
+            $tranxationNumber = "TXN". "/" . sprintf("%06d", abs((int) $paymentRequest->id + 1))  . "/" . date("Y");
+            $update = [
+                'transaction_id' => $tranxationNumber,
+            ];
+            CitizenPayment::whereId($paymentRequest->id)->update($update);
+
+            return redirect()->route('payment-request.index')->with('message','Payment Request Created Successfully');
+
+        } catch(\Exception $ex){
+
+            return redirect()->back()->with('error','Something Went Wrong  - '.$ex->getMessage());
+        }
     }
 
     /**
@@ -57,7 +88,7 @@ class CitizenPaymentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CitizenPaymentRequest $request, string $id)
     {
         //
     }
@@ -73,7 +104,7 @@ class CitizenPaymentController extends Controller
             $citizenPayment = CitizenPayment::find($id);
             $citizenPayment->update($data);
 
-            return redirect()->route('payment-request.index')->with('message','Payment Deleted Succeessfully');
+            return redirect()->route('payment-request.index')->with('message','Payment Request Deleted Succeessfully');
         } catch(\Exception $ex){
 
             return redirect()->back()->with('error','Something Went Wrong - '.$ex->getMessage());

@@ -45,6 +45,7 @@ class Citizen extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'backup_password',
         'remember_token',
     ];
 

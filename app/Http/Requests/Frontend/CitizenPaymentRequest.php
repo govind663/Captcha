@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Frontend;
 
+use DateTime;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CitizenPaymentRequest extends FormRequest
@@ -26,32 +27,28 @@ class CitizenPaymentRequest extends FormRequest
                 'citizen_id' => 'required|numeric|max:5',
                 'email' => 'required|email|max:255|exists:citizens,email'.$this->id,
                 'amount' => 'required|numeric|min:0',
-                'bank_name' => 'required|alpha_dash|string|max:250',
+                'bank_name' => 'required|string|max:250',
                 'bank_branch' => 'required|alpha_dash|string|max:250',
-                'account_holder_name' => 'required|alpha_dash|string|max:250',
+                'account_holder_name' => 'required|string|max:250',
                 'account_number' => 'required|alpha_num|max:16',
                 'ifsc_code' => 'required|alpha_num|max:11',
                 'payment_mode' => 'required|numeric|max:3',
-                'transaction_status' => 'required|numeric|max:3',
-                'transaction_date' =>'required|date_format:d-m-Y',
-                'transaction_time' =>'required|date_format:H:i:s',
-                'notes' => 'required|string',
+                'transaction_date' =>'required|date_format:Y-m-d',
+                'transaction_time' =>'required|date_format:H:i',
             ];
         }else{
             $rule = [
                 'citizen_id' => 'required|numeric|max:5',
                 'email' => 'required|email|max:255|unique:citizens,email,NULL,id,deleted_at,NULL',
                 'amount' => 'required|numeric|min:0',
-                'bank_name' => 'required|alpha_dash|string|max:250',
+                'bank_name' => 'required|string|max:250',
                 'bank_branch' => 'required|alpha_dash|string|max:250',
-                'account_holder_name' => 'required|alpha_dash|string|max:250',
+                'account_holder_name' => 'required|string|max:250',
                 'account_number' => 'required|alpha_num|max:16',
                 'ifsc_code' => 'required|alpha_num|max:11',
                 'payment_mode' => 'required|numeric|max:3',
-                'transaction_status' => 'required|numeric|max:3',
-                'transaction_date' =>'required|date_format:d-m-Y',
-                'transaction_time' =>'required|date_format:H:i:s',
-                'notes' => 'required|string',
+                'transaction_date' =>'required|date_format:Y-m-d',
+                'transaction_time' =>'required|date_format:H:i',
             ];
         }
         return $rule;
@@ -73,7 +70,6 @@ class CitizenPaymentRequest extends FormRequest
             'amount.min' => 'Amount must be minimum 0',
 
             'bank_name.required' => 'Bank Name is required',
-            'bank_name.alpha_dash' => 'Bank Name must be alphanumeric with dash',
             'bank_name.string' => 'Bank Name must be string',
             'bank_name.max' => 'Bank Name must be max 250',
 
@@ -83,7 +79,6 @@ class CitizenPaymentRequest extends FormRequest
             'bank_branch.max' => 'Bank Branch must be max 250',
 
             'account_holder_name.required' => 'Account Holder Name is required',
-            'account_holder_name.alpha_dash' => 'Account Holder Name must be alphanumeric with dash',
             'account_holder_name.string' => 'Account Holder Name must be string',
             'account_holder_name.max' => 'Account Holder Name must be max 250',
 
@@ -99,18 +94,17 @@ class CitizenPaymentRequest extends FormRequest
             'payment_mode.numeric' => 'Payment Mode must be numeric',
             'payment_mode.max' => 'Payment Mode must be max 3',
 
-            'transaction_status.required' => 'Transaction Status is required',
-            'transaction_status.numeric' => 'Transaction Status must be numeric',
-            'transaction_status.max' => 'Transaction Status must be max 3',
+            'transaction_date.required' => 'Payment Date is required',
+            'transaction_date.date_format' => 'Payment Date must be in Y-m-d format',
 
-            'transaction_date.required' => 'Transaction Date is required',
-            'transaction_date.date_format' => 'Transaction Date must be in d-m-Y format',
-
-            'transaction_time.required' => 'Transaction Time is required',
-            'transaction_time.date_format' => 'Transaction Time must be in H:i:s format',
-
-            'notes.required' => 'Notes is required',
-            'notes.string' => 'Notes must be string',
+            'transaction_time.required' => 'Payment Time is required',
+            'transaction_time.date_format' => 'Payment Time must be in H:i format',
         ];
+    }
+
+    // ==== transaction_date
+    public function passesTransactionDate($attribute, $value){
+        $date = DateTime::createFromFormat('Y-m-d', $value);
+        return $date && $date->format('Y-m-d') === $value;
     }
 }
