@@ -15,7 +15,8 @@ class HomeController extends Controller
 
         // ==== total captcha amount
         $totalCaptchaAmount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('per_captcha_amount')->first();
-        // ==== wrongCaptchaCount
+
+        // ==== rightCaptchaCount
         $rightCaptchaCount = CaptchaCount::where('citizen_id', Auth::user()->id)->whereNull('deleted_at')->pluck('is_correct_captcha_count')->first();
 
         // ==== wrongCaptchaCount

@@ -65,6 +65,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
 
     // ==== Manage Package
     Route::resource('package', PackageController::class);
+    // === package_amt
+    Route::post('package_amt', [PackageController::class, 'package_amt'])->name('package_amt');
 
     // ==== Manage Admin
     Route::resource('admin', AdminController::class);

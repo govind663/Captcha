@@ -29,6 +29,7 @@ class RegisterRequest extends FormRequest
                 'mobile_no' => 'required|numeric',
                 'user_id' => 'required|numeric',
                 'package_id' => 'required|numeric',
+                'package_amt' => 'required|string',
                 'payment_type' => 'required|numeric',
             ];
         }else{
@@ -39,6 +40,7 @@ class RegisterRequest extends FormRequest
                 'mobile_no' => 'required|numeric',
                 'user_id' => 'required|numeric',
                 'package_id' => 'required|numeric',
+                'package_amt' => 'required|string',
                 'payment_type' => 'required|numeric',
                 'password' => 'required|string|min:8|confirmed',
                 'password_confirmation' => 'required',
@@ -71,6 +73,9 @@ class RegisterRequest extends FormRequest
 
             'package_id.required' => __('Package Name is required'),
             'package_id.numeric' => __('Package Name must be numeric'),
+
+            'package_amt.required' => __('Package Amount is required'),
+            'package_amt.string' => __('Invalid Package Amount format'),
 
             'payment_type.required' => __('Payment Type is required'),
             'payment_type.numeric' => __('Payment Type must be numeric'),

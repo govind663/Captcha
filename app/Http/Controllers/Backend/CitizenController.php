@@ -48,21 +48,13 @@ class CitizenController extends Controller
             $data->mobile_no = $request->get('mobile_no');
             $data->user_id = $request->get('user_id');
             $data->package_id = $request->get('package_id');
+            $data->package_amt = $request->get('package_amt');
+            $data->captcha_type_id = $request->get('captcha_type_id');
             $data->payment_type = $request->get('payment_type');
             $data->password = Hash::make($request->get('password'));
             $data->created_at = Carbon::now();
             $data->created_by = Auth::user()->id;
             $data->save();
-
-            // === get Captch Type by using package_id
-            $package = Package::find($data->package_id);
-
-            if($package->captcha_type_id == $data->package_id){
-                $update = [
-                    'captcha_type_id' => Package::first()->captcha_type_id,
-                ];
-                Citizen::where('id', $data->id)->update($update);
-            }
 
             return redirect()->route('citizen.index')->with('message','Citizen Created Successfully');
 
@@ -110,20 +102,12 @@ class CitizenController extends Controller
             $data->mobile_no = $request->get('mobile_no');
             $data->user_id = $request->get('user_id');
             $data->package_id = $request->get('package_id');
+            $data->package_amt = $request->get('package_amt');
+            $data->captcha_type_id = $request->get('captcha_type_id');
             $data->payment_type = $request->get('payment_type');
             $data->updated_at = Carbon::now();
             $data->updated_by = Auth::user()->id;
             $data->save();
-
-            // === get Captch Type by using package_id
-            $package = Package::find($data->package_id);
-
-            if($package->captcha_type_id == $data->package_id){
-                $update = [
-                    'captcha_type_id' => Package::first()->captcha_type_id,
-                ];
-                Citizen::where('id', $data->id)->update($update);
-            }
 
             return redirect()->route('citizen.index')->with('message','Citizen Updated Successfully');
 

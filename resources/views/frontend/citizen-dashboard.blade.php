@@ -69,7 +69,7 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Right Captcha</div>
                                 <div class="dash-counts text-dark">
-                                    <p>{{ $rightCaptchaCount }}</p>
+                                    <p>{{ $rightCaptchaCount  ? $rightCaptchaCount : 0 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Wrong Captcha</div>
                                 <div class="dash-counts text-dark">
-                                    <p>{{ $wrongCaptchaCount }}</p>
+                                    <p>{{ $wrongCaptchaCount ? $wrongCaptchaCount : 0 }}</p>
                                 </div>
                             </div>
                         </div>

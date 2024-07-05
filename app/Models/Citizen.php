@@ -17,13 +17,16 @@ class Citizen extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
+        'captcha_type_id',
+        'is_active',
         'user_type',
         'mobile_no',
-        'name',
         'email',
         'password',
         'user_id',
         'package_id',
+        'package_amt',
         'payment_type',
         'created_by',
         'created_at',

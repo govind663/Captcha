@@ -108,6 +108,19 @@
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="input-block mb-3">
+                                            <label><b>Package Amount : <span class="text-danger">*</span></b></label>
+                                            <input type="text" readonly id="package_amt" name="package_amt" class="form-control @error('package_amt') is-invalid @enderror" value="{{ $citizen->package_amt }}" placeholder="Enter Package Amount">
+                                            <input type="text" hidden id="captcha_type_id" name="captcha_type_id" class="form-control" value="{{ $citizen->captcha_type_id }}">
+                                            @error('package_amt')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="input-block mb-3" >
                                             <label><b>Payment Type : <span class="text-danger">*</span></b></label>
                                             <select class="@error('payment_type') is-invalid @enderror select" id="payment_type" name="payment_type">
@@ -263,6 +276,33 @@
                 $('#payment_type').append(newOption).trigger('change');
             }
         }
+    });
+</script>
+
+{{-- Fetch Package Amount based on Package Id --}}
+<script>
+    $(document).ready(function(){
+
+        $(document).on('change','#package_id', function() {
+            let package_id = $(this).val();
+            $('#package_amt').show();
+            $.ajax({
+                method: 'post',
+                url: "{{ route('package_amt') }}",
+                data: {
+                    packageId: package_id,
+                    _token : '{{ csrf_token() }}',
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('#package_amt').val(data.package_amount);
+                    $('#captcha_type_id').val(data.captcha_type);
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error:', error);
+                }
+            })
+        });
     });
 </script>
 @endpush

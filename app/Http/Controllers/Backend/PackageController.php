@@ -150,4 +150,12 @@ class PackageController extends Controller
             return redirect()->back()->with('error','Something Went Wrong - '.$ex->getMessage());
         }
     }
+
+    //  ==== package_amt
+    public function package_amt(Request $request){
+        $package_id = $request->packageId;
+        $data['package_amount'] = Package::whereId($package_id)->whereNull('deleted_at')->pluck('amount');
+        $data['captcha_type'] = Package::whereId($package_id)->whereNull('deleted_at')->pluck('captcha_type_id');
+        return response()->json($data);
+    }
 }
