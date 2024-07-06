@@ -35,22 +35,29 @@ Payment Request | Add
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Name : <span class="text-danger">*</span></b></label>
-                                                <input type="hidden" readonly id="citizen_id" name="citizen_id" class="form-control" value="{{ Auth::user()->id }}">
-                                                <input type="text" class="form-control" value="{{ Auth::user()->name }}">
+                                                <input type="hidden" id="citizen_id" name="citizen_id" class="form-control" value="{{ Auth::user()->id }}">
+                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Email Id : <span class="text-danger">*</span></b></label>
-                                                <input type="email" readonly id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                                                <input type="email" disabled id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <label><b>Amount : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="amount" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" placeholder="Enter Amount">
+                                                <label><b>Per Captcha Amount : <span class="text-danger">*</span></b></label>
+                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->package_amt }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Request Amount : <span class="text-danger">*</span></b></label>
+                                                <input type="text"  id="amount" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" placeholder="Enter request Amount">
 
                                                 @error('amount')
                                                     <span class="invalid-feedback" role="alert">
@@ -66,65 +73,35 @@ Payment Request | Add
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Bank Name : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="bank_name" name="bank_name" class="form-control @error('bank_name') is-invalid @enderror" value="{{ old('bank_name') }}" placeholder="Enter Bank Name">
-
-                                                @error('bank_name')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->bank_name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Branch Name : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="branch_name" name="branch_name" class="form-control @error('branch_name') is-invalid @enderror" value="{{ old('branch_name') }}" placeholder="Enter Branch Name">
-
-                                                @error('branch_name')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->branch_name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Account Holder Name : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="account_holder_name" name="account_holder_name" class="form-control @error('account_holder_name') is-invalid @enderror" value="{{ old('account_holder_name') }}" placeholder="Enter Account Holder Name">
-
-                                                @error('account_holder_name')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->account_holder_name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Account Number : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="account_number" name="account_number" class="form-control @error('account_number') is-invalid @enderror" value="{{ old('account_number') }}" placeholder="Enter Account Number">
-
-                                                @error('account_number')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->account_number }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>IFSC Code : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="ifsc_code" name="ifsc_code" class="form-control @error('ifsc_code') is-invalid @enderror" value="{{ old('ifsc_code') }}" placeholder="Enter IFSC Code">
-
-                                                @error('ifsc_code')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->ifsc_code }}">
                                             </div>
                                         </div>
 
