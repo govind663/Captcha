@@ -38,21 +38,15 @@ class CitizenPaymentController extends Controller
 
             $paymentRequest = new CitizenPayment();
             $paymentRequest->citizen_id = $request->citizen_id;
-            $paymentRequest->email = $request->email;
-            $paymentRequest->amount = $request->amount;
-            $paymentRequest->bank_name = $request->bank_name;
-            $paymentRequest->branch_name = $request->branch_name;
-            $paymentRequest->account_holder_name = $request->account_holder_name;
-            $paymentRequest->account_number = $request->account_number;
-            $paymentRequest->ifsc_code = $request->ifsc_code;
             $paymentRequest->payment_mode = $request->payment_mode;
             $paymentRequest->transaction_date = date("Y-m-d", strtotime($request->transaction_date));
             $paymentRequest->transaction_time = date("H:i", strtotime($request->transaction_time));
+            $paymentRequest->notes = $request->notes;
             $paymentRequest->inserted_at = Carbon::now();
             $paymentRequest->inserted_by = Auth::user()->id;
             $paymentRequest->save();
 
-            // Generate Transaction Id             
+            // Generate Transaction Id
             $tranxationNumber = "TXN". "/" . sprintf("%06d", abs((int) $paymentRequest->id + 1))  . "/" . date("Y");
             $update = [
                 'transaction_id' => $tranxationNumber,

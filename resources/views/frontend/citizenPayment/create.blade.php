@@ -148,6 +148,18 @@ Payment Request | Add
                                             </div>
                                         </div>
 
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Notes : <span class="text-danger">*</span></b></label>
+                                                <textarea type="text" id="notes" name="notes"  class="form-control @error('notes') is-invalid @enderror" value="{{ old('notes') }}" placeholder="Enter Notes">{{ old('notes') }}</textarea>
+                                                @error('notes')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="add-customer-btns text-start">

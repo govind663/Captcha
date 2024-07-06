@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('payment_mode')->nullable()->comment('1 => Cash, 2 => Cheque, 3 => Online Transfer, 4 => GooglePay, 5 => PhonePay');
             $table->integer('transaction_status')->default(1)->comment('1 => Pending, 2 => Paid, 3 => Cancelled');
             $table->date('transaction_date')->nullable();
-            $table->string('transaction_time')->nullable();
+            $table->time('transaction_time')->nullable();
             $table->text('notes')->nullable();
 
             $table->integer('inserted_by')->nullable();
