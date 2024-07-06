@@ -98,7 +98,8 @@ Route::group(['prefix' => 'citizen','middleware' => ['auth:citizen', PreventBack
     Route::post('/change-password', [CitizenHomeController::class, 'updatePassword'])->name('citizen.update-password');
 
     // ==== View Citizen Profile
-    Route::get('/profile/view/{id?}', [CitizenHomeController::class, 'viewProfile'])->name('citizen.profile.view');
+    Route::get('/profile/edit/{id?}', [CitizenHomeController::class, 'editProfile'])->name('citizen.profile.edit');
+    Route::post('/profile/update/{id?}', [CitizenHomeController::class, 'updateProfile'])->name('citizen.profile.update');
 
     // ===== Manage Captcha
     Route::resource('captcha', CitizenCaptchaController::class);

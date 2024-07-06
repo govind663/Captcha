@@ -67,7 +67,7 @@
                     <div class="subscription-menu">
                         <ul>
                             <li>
-                                <a class="dropdown-item" href="{{ route('citizen.profile.view', Auth::user()->id) }}">Citizen Profile</a>
+                                <a class="dropdown-item" href="{{ route('citizen.profile.edit', Auth::user()->id) }}">Citizen Profile</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('citizen.change-password') }}">Change Password</a>

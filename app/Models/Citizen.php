@@ -71,4 +71,9 @@ class Citizen extends Authenticatable
     public function package(){
         return $this->belongsTo(Package::class, 'package_id');
     }
+
+    // Relationship Between captcha_type_id
+    public function captchaType(){
+        return $this->belongsTo(CaptchaType::class, 'captcha_type_id');
+    }
 }

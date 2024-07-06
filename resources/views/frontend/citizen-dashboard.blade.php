@@ -109,7 +109,10 @@
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Captcha</div>
                                 <div class="dash-counts text-dark">
-                                   <p>{{ $totalCaptchaCount ? $totalCaptchaCount : 0 }}</p>
+                                    @php
+                                        $totalCaptchaCount = $rightCaptchaCount + $wrongCaptchaCount;
+                                    @endphp
+                                    <p>{{ $totalCaptchaCount ? $totalCaptchaCount : 0 }}</p>
                                 </div>
                             </div>
                         </div>

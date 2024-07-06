@@ -67,9 +67,44 @@ class HomeController extends Controller
             return back()->with("message", "Password changed successfully!");
     }
 
-    // ===== viewProfile
-    public function viewProfile(string $id){
-        $citizen = Citizen::with('user', 'package')->find($id);
+    // ===== editProfile
+    public function editProfile(string $id){
+        $citizen = Citizen::with('user', 'package','captchaType')->find($id);
         return view('frontend.auth.profile',['citizen'=>$citizen]);
+    }
+
+    // ==== updateProfile
+    protected function updateProfile(Request $request, string $id){
+        $request->validate([
+            'bank_name' =>'required|string|max:255',
+            'branch_name' =>'required|string|max:255',
+            'account_holder_name' =>'required|string|max:255',
+            'account_number' =>'required|string|max:255',
+            'ifsc_code' =>'required|string|max:255',
+        ],[
+            'bank_name.required' => 'Bank Name is required',
+            'branch_name.required' => 'Branch Name is required',
+            'account_holder_name.required' => 'Account Holder Name is required',
+            'account_number.required' => 'Account Number is required',
+            'ifsc_code.required' => 'IFSC Code is required',
+        ]);
+
+        try {
+
+            $citizenProfile = Citizen::find($id);
+            $citizenProfile->bank_name = $request->bank_name;
+            $citizenProfile->branch_name = $request->branch_name;
+            $citizenProfile->account_holder_name = $request->account_holder_name;
+            $citizenProfile->account_number = $request->account_number;
+            $citizenProfile->ifsc_code = $request->ifsc_code;
+            $citizenProfile->updated_at = date('Y-m-d H:i:s');
+            $citizenProfile->updated_by = Auth::user()->id;
+            $citizenProfile->save();
+
+            return redirect()->route('citizen.dashboard')->with('success', 'Profile updated successfully.');
+
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error','Something Went Wrong  - '.$ex->getMessage());
+        }
     }
 }
