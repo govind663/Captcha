@@ -14,6 +14,8 @@ class CitizenPayment extends Model
         'id',
         'transaction_id',
         'citizen_id',
+        'per_captcha_amt',
+        'request_amount',
         'payment_mode',
         'transaction_status',
         'transaction_date',
@@ -28,4 +30,9 @@ class CitizenPayment extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    // Relationship Between citizen_id
+    public function citizen(){
+        return $this->belongsTo(Citizen::class, 'citizen_id');
+    }
 }

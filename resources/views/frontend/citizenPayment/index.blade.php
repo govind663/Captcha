@@ -26,6 +26,14 @@ Payment Request | List
     .form-control {
         border: 1px solid #387dff !important;
     }
+    .d-flex1 {
+        display: flex !important;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+        align-items: stretch;
+    }
 </style>
 @endpush
 
@@ -51,23 +59,23 @@ Payment Request | List
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="row card-body">
-                        <div class="col-10 float-left">
+                    <div class="card-body d-flex1">
+                        <div class="justify-content-start">
                             <h5 class="card-title">All Payment Request List</h5>
                         </div>
-                        <div class="col-2 float-right">
+                        <div class="justify-content-end">
                             <a href="{{ route('payment-request.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Payment Request
+                                <i class="fa fa-plus me-2" aria-hidden="true"></i> Payment Request
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
-
                         <div class="table-responsive">
                             <table class="data-table-export1 table">
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
+                                        <th>Payment ID</th>
                                         <th>Name</th>
                                         <th>Amount</th>
                                         <th>Payment Mode</th>
@@ -76,15 +84,42 @@ Payment Request | List
                                         <th class="no-export">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
                                     @foreach ($citizenPayment as $key=>$value )
                                     <tr>
                                         <td>{{ $key+1 }}</td>
+                                        <td>{{ $value->transaction_id }}</td>
+                                        <td>{{ $value->citizen?->name }}</td>
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+
+                                        <td>
+                                            @if ($value->payment_mode == 1)
+                                            <span class="badge bg-success">Cash</span>
+                                            @elseif($value->payment_mode == 2)
+                                            <span class="badge bg-info">Cheque</span>
+                                            @elseif($value->payment_mode == 3)
+                                            <span class="badge bg-primary">Online Transfer</span>
+                                            @elseif($value->payment_mode == 4)
+                                            <span class="badge bg-warning">Google Pay</span>
+                                            @elseif($value->payment_mode == 5)
+                                            <span class="badge bg-danger">Phone Pay</span>
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if ($value->transaction_status == 1)
+                                            <span class="badge bg-primary">Pending</span>
+                                            @elseif($value->transaction_status == 2)
+                                            <span class="badge bg-success">Paid</span>
+                                            @elseif($value->transaction_status == 3)
+                                            <span class="badge bg-danger">Cancelled</span>
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            {{ date( 'd-m-Y', strtotime($value->transaction_date) ) }}
+                                            {{ date( 'H:i', strtotime($value->transaction_time) ) }}
+                                        </td>
+
                                         <td class="no-export d-flex">
                                             <a href="{{ route('payment-request.edit', $value->id) }}" class="btn btn-warning btn-sm text-dark">
                                                 <i class="far fa-edit me-2"></i>Edit

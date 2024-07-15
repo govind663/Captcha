@@ -29,37 +29,37 @@ Payment Request | Add
                             <form method="POST" action="{{ route('payment-request.store') }}" enctype="multipart/form-data">
                                 @csrf
 
-                                <div class="form-group-customer customer-additional-form">
+                                <div class="row">
                                     <div class="row">
                                         <h5 class="card-title text-primary mb-2">Basic Details : -</h5>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Name : <span class="text-danger">*</span></b></label>
                                                 <input type="hidden" id="citizen_id" name="citizen_id" class="form-control" value="{{ Auth::user()->id }}">
-                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->name }}">
+                                                <input type="text" readonly class="form-control" value="{{ Auth::user()->name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Email Id : <span class="text-danger">*</span></b></label>
-                                                <input type="email" disabled id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                                                <input type="email" readonly id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Per Captcha Amount : <span class="text-danger">*</span></b></label>
-                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->package_amt }}">
+                                                <input type="text" readonly id="per_captcha_amt" name="per_captcha_amt" class="form-control" value="{{ Auth::user()->package_amt }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Request Amount : <span class="text-danger">*</span></b></label>
-                                                <input type="text"  id="amount" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" placeholder="Enter request Amount">
+                                                <input type="text"  id="request_amount" name="request_amount" class="form-control @error('request_amount') is-invalid @enderror" value="{{ old('request_amount') }}" placeholder="Enter request request_amount">
 
-                                                @error('amount')
+                                                @error('request_amount')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -73,35 +73,35 @@ Payment Request | Add
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Bank Name : <span class="text-danger">*</span></b></label>
-                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->bank_name }}">
+                                                <input type="text" readonly class="form-control" value="{{ Auth::user()->bank_name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Branch Name : <span class="text-danger">*</span></b></label>
-                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->branch_name }}">
+                                                <input type="text" readonly class="form-control" value="{{ Auth::user()->branch_name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Account Holder Name : <span class="text-danger">*</span></b></label>
-                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->account_holder_name }}">
+                                                <input type="text" readonly class="form-control" value="{{ Auth::user()->account_holder_name }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Account Number : <span class="text-danger">*</span></b></label>
-                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->account_number }}">
+                                                <input type="text" readonly class="form-control" value="{{ Auth::user()->account_number }}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>IFSC Code : <span class="text-danger">*</span></b></label>
-                                                <input type="text" disabled class="form-control" value="{{ Auth::user()->ifsc_code }}">
+                                                <input type="text" readonly class="form-control" value="{{ Auth::user()->ifsc_code }}">
                                             </div>
                                         </div>
 
@@ -127,12 +127,14 @@ Payment Request | Add
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Payment Date : <span class="text-danger">*</span></b></label>
-                                                <input type="date" id="transaction_date" name="transaction_date"  class="form-control @error('transaction_date') is-invalid @enderror" value="{{ old('transaction_date') }}" placeholder="Enter Payment Date">
-                                                @error('transaction_date')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <div class="cal-icon cal-icon-info">
+                                                    <input type="text" id="transaction_date" name="transaction_date"  class="form-control datetimepicker @error('transaction_date') is-invalid @enderror" value="{{ old('transaction_date') }}" placeholder="Enter Payment Date">
+                                                    @error('transaction_date')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
 
@@ -162,6 +164,7 @@ Payment Request | Add
 
                                     </div>
                                 </div>
+
                                 <div class="add-customer-btns text-start">
                                     <a href="{{ route('payment-request.index') }}" class="btn btn-danger">Cancel</a>
                                     <button type="submit" class="btn btn-success">Submit</button>
