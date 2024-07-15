@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Auth\RegisterRequest;
+use App\Mail\CitizenMail;
 use App\Models\Citizen;
 use App\Models\Package;
 use App\Models\User;
@@ -11,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class CitizenController extends Controller
 {
@@ -41,20 +43,31 @@ class CitizenController extends Controller
     {
         $request->validated();
         try {
-            $data = new Citizen();
-            $data->user_type = 3;
-            $data->name = $request->get('name');
-            $data->email = $request->get('email');
-            $data->mobile_no = $request->get('mobile_no');
-            $data->user_id = $request->get('user_id');
-            $data->package_id = $request->get('package_id');
-            $data->package_amt = $request->get('package_amt');
-            $data->captcha_type_id = $request->get('captcha_type_id');
-            $data->payment_type = $request->get('payment_type');
-            $data->password = Hash::make($request->get('password'));
-            $data->created_at = Carbon::now();
-            $data->created_by = Auth::user()->id;
-            $data->save();
+            $citizen = new Citizen();
+            $citizen->user_type = 3;
+            $citizen->name = $request->get('name');
+            $citizen->email = $request->get('email');
+            $citizen->mobile_no = $request->get('mobile_no');
+            $citizen->user_id = $request->get('user_id');
+            $citizen->package_id = $request->get('package_id');
+            $citizen->package_amt = $request->get('package_amt');
+            $citizen->captcha_type_id = $request->get('captcha_type_id');
+            $citizen->payment_type = $request->get('payment_type');
+            $citizen->password = Hash::make($request->get('password'));
+            $citizen->backup_password = $request->get('password');
+            $citizen->created_at = Carbon::now();
+            $citizen->created_by = Auth::user()->id;
+            $citizen->save();
+
+
+            $citizenDetails = [
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => $request->get('password')
+            ];
+
+            // send Mail
+            Mail::to($request->get('email'))->send(new CitizenMail($citizenDetails));
 
             return redirect()->route('citizen.index')->with('message','Citizen Created Successfully');
 
@@ -95,19 +108,19 @@ class CitizenController extends Controller
     {
         $request->validated();
         try {
-            $data = Citizen::find($id);
-            $data->user_type = 3;
-            $data->name = $request->get('name');
-            $data->email = $request->get('email');
-            $data->mobile_no = $request->get('mobile_no');
-            $data->user_id = $request->get('user_id');
-            $data->package_id = $request->get('package_id');
-            $data->package_amt = $request->get('package_amt');
-            $data->captcha_type_id = $request->get('captcha_type_id');
-            $data->payment_type = $request->get('payment_type');
-            $data->updated_at = Carbon::now();
-            $data->updated_by = Auth::user()->id;
-            $data->save();
+            $citizen = Citizen::find($id);
+            $citizen->user_type = 3;
+            $citizen->name = $request->get('name');
+            $citizen->email = $request->get('email');
+            $citizen->mobile_no = $request->get('mobile_no');
+            $citizen->user_id = $request->get('user_id');
+            $citizen->package_id = $request->get('package_id');
+            $citizen->package_amt = $request->get('package_amt');
+            $citizen->captcha_type_id = $request->get('captcha_type_id');
+            $citizen->payment_type = $request->get('payment_type');
+            $citizen->updated_at = Carbon::now();
+            $citizen->updated_by = Auth::user()->id;
+            $citizen->save();
 
             return redirect()->route('citizen.index')->with('message','Citizen Updated Successfully');
 
