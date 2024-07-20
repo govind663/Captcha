@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class CitizenMail extends Mailable
 {
@@ -20,6 +21,9 @@ class CitizenMail extends Mailable
     public function __construct($citizenDetails)
     {
         $this->citizenDetails = $citizenDetails;
+
+        // Debugging
+        Log::info('Citizen Details:', $citizenDetails);
     }
 
     /**
@@ -38,7 +42,9 @@ class CitizenMail extends Mailable
     public function content(): Content
     {
         return new Content(
+            // === How to passed $citizenDetails
             view: 'mail.citizen-mailer',
+            with: ['citizenDetails' => $this->citizenDetails],
         );
     }
 

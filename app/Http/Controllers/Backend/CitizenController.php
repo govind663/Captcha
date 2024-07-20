@@ -39,11 +39,9 @@ class CitizenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RegisterRequest $request)
+    public function store(Request $request)
     {
-        $request->validated();
-        try {
-            $citizen = new Citizen();
+        $citizen = new Citizen();
             $citizen->user_type = 3;
             $citizen->name = $request->get('name');
             $citizen->email = $request->get('email');
@@ -61,20 +59,15 @@ class CitizenController extends Controller
 
 
             $citizenDetails = [
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
-                'password' => $request->get('password')
+                'name' =>  $citizen->name,
+                'email' =>  $citizen->email,
+                'password' =>  $citizen->password,
             ];
 
             // send Mail
             Mail::to($request->get('email'))->send(new CitizenMail($citizenDetails));
 
             return redirect()->route('citizen.index')->with('message','Citizen Created Successfully');
-
-        } catch(\Exception $ex){
-
-            return redirect()->back()->with('error','Something Went Wrong  - '.$ex->getMessage());
-        }
     }
 
     /**
