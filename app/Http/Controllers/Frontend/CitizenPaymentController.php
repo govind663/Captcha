@@ -138,10 +138,19 @@ class CitizenPaymentController extends Controller
     }
 
     // ==== Manage Payment Request View with status
-    public function viewPaymentRequestList(){
-        $citizenPayment = CitizenPayment::with('citizen')->orderBy("id","desc")->whereNull('deleted_at')->get();
+    public function viewPaymentRequestList(int $status, int $id){
+        $citizenPayment = CitizenPayment::find($id)
+                                         ->with('citizen')
+                                         ->where('transaction_status', $status)
+                                         ->orderBy("id","desc")
+                                         ->whereNull('deleted_at')
+                                         ->first();
 
-        return view('backend.citizenPayment.view', ['citizenPayment' => $citizenPayment]);
+        return view('backend.citizenPayment.view', [
+            'citizenPayment' => $citizenPayment,
+            'status' => $status,
+            'id' => $id,
+        ]);
     }
 
 }

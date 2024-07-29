@@ -125,7 +125,7 @@ Payment Request | List
                                         @endif
 
                                         <td class="no-export ">
-                                            <a href="" class="btn btn-warning btn-sm text-dark">
+                                            <a href="{{ route('admin.payment-request-list.view', [ 'id' => $value->id, 'status'=>$value->transaction_status]) }}" class="btn btn-warning btn-sm text-dark">
                                                 <i class="far fa-eye me-2"></i>View
                                             </a>
                                         </td>
