@@ -129,6 +129,11 @@ Captcha  | Add
             .then(blob => {
                 const url = URL.createObjectURL(blob);
                 document.getElementById(elementId).src = url;
+                document.getElementById(`captcha_length`).value = response.headers.get('captcha-length');
+                document.getElementById(`package_id`).value = response.headers.get('package-id');
+                document.getElementById(`package_amt`).value = response.headers.get('package-amt');
+                document.getElementById(`captcha_type_id`).value = response.headers.get('captcha-type-id');
+                document.getElementById(`captcha_code`).value = '';
             })
             .catch(error => console.error('Error refreshing captcha:', error));
     }

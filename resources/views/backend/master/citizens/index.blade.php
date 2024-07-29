@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Citizen | List
+User | List
 @endsection
 
 @push('styles')
@@ -26,6 +26,14 @@ Citizen | List
     .form-control {
         border: 1px solid #387dff !important;
     }
+    .d-flex1 {
+        display: flex !important;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+        align-items: stretch;
+    }
 </style>
 @endpush
 
@@ -38,10 +46,10 @@ Citizen | List
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Manage Citizen</h3>
+                    <h3 class="page-title">Manage User</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">All Citizen List</li>
+                        <li class="breadcrumb-item active">All User List</li>
                     </ul>
                 </div>
             </div>
@@ -51,13 +59,13 @@ Citizen | List
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="row card-body">
-                        <div class="col-10">
-                            <h5 class="card-title">All Citizen List</h5>
+                    <div class="card-body d-flex1">
+                        <div class="justify-content-start">
+                            <h5 class="card-title">All User List</h5>
                         </div>
-                        <div class="col-2 float-right">
+                        <div class="justify-content-end">
                             <a href="{{ route('citizen.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Citizen
+                                <i class="fa fa-plus me-2" aria-hidden="true"></i>User
                             </a>
                         </div>
                     </div>

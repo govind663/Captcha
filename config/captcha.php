@@ -29,6 +29,7 @@ return [
         'inverse' => false,
         'expire' => 900,
         'encrypt' => true,
+        'contrast' => -5,
     ],
     'math' => [
         'length' => 9,

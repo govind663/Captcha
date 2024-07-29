@@ -67,7 +67,7 @@ class CitizenController extends Controller
             // send Mail
             Mail::to($request->get('email'))->send(new CitizenMail($citizenDetails));
 
-            return redirect()->route('citizen.index')->with('message','Citizen Created Successfully');
+            return redirect()->route('citizen.index')->with('message','User Created Successfully');
     }
 
     /**
@@ -115,7 +115,7 @@ class CitizenController extends Controller
             $citizen->updated_by = Auth::user()->id;
             $citizen->save();
 
-            return redirect()->route('citizen.index')->with('message','Citizen Updated Successfully');
+            return redirect()->route('citizen.index')->with('message','User Updated Successfully');
 
         } catch(\Exception $ex){
 
@@ -134,7 +134,7 @@ class CitizenController extends Controller
             $employee = Citizen::findOrFail($id);
             $employee->update($data);
 
-            return redirect()->route('citizen.index')->with('message','Citizen Deleted Succeessfully');
+            return redirect()->route('citizen.index')->with('message','User Deleted Succeessfully');
         } catch(\Exception $ex){
 
             return redirect()->back()->with('error','Something Went Wrong - '.$ex->getMessage());

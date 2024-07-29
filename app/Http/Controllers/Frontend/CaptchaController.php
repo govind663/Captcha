@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CaptchaRequest;
 use App\Models\Captcha;
 use App\Models\CaptchaCount;
+use App\Models\CaptchaType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -128,8 +129,17 @@ class CaptchaController extends Controller
     }
 
     // ==== getCaptcha
-    public function getCaptcha($type = 'default'){
-        return response(captcha_src($type))->header('Content-Type', 'image/png');
+    public function getCaptcha($type = 'default', Request $request){
+        // get captcha_type_id
+        $captchaTypeId = $request->captcha_type_id;
+
+        // check CaptchaTypeId
+        $captchaType = CaptchaType::find($captchaTypeId);
+        if(!$captchaType){
+            return response()->json(['error' => 'Invalid Captcha Type'], 400);
+        }
+        // return captcha image as response  with content type as image/png  and header with content type as image/png  and header with content type as image/png   and header with content type as image/png  and header with content type as image/
+        return response(captcha_src($captchaType))->header('Content-Type', 'image/png');
     }
 
 }

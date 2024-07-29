@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-  Citizen | Update
+  User | Update
 @endsection
 
 @push('styles')
@@ -20,7 +20,7 @@
 
                 <div class="page-header">
                     <div class="content-page-header">
-                        <h5>Edit Citizen</h5>
+                        <h5>Edit User</h5>
                     </div>
                 </div>
 

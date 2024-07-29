@@ -1,7 +1,7 @@
-@extends('backend.layouts.master')
+@extends('frontend.layouts.master')
 
 @section('title')
-Manage Captcha Type | List
+Manage Captcha | List
 @endsection
 
 @push('styles')
@@ -26,14 +26,6 @@ Manage Captcha Type | List
     .form-control {
         border: 1px solid #387dff !important;
     }
-    .d-flex1 {
-        display: flex !important;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        align-content: center;
-        justify-content: space-between;
-        align-items: stretch;
-    }
 </style>
 @endpush
 
@@ -46,10 +38,10 @@ Manage Captcha Type | List
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Manage Captcha Type</h3>
+                    <h3 class="page-title">Manage Captcha </h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">All Captcha Type List</li>
+                        <li class="breadcrumb-item active">All Captcha List</li>
                     </ul>
                 </div>
             </div>
@@ -59,13 +51,13 @@ Manage Captcha Type | List
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-body d-flex1">
-                        <div class="justify-content-start">
-                            <h5 class="card-title">All Captcha Type List</h5>
+                    <div class="row card-body">
+                        <div class="col-10">
+                            <h5 class="card-title">All Captcha List</h5>
                         </div>
-                        <div class="justify-content-end">
-                            <a href="{{ route('captcha-type.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Captcha Type
+                        <div class="col-2 float-right">
+                            <a href="{{ route('captcha.create') }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Captcha
                             </a>
                         </div>
                     </div>
@@ -76,35 +68,30 @@ Manage Captcha Type | List
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
+                                        <th>User Name</th>
                                         <th>Captcha Type</th>
-                                        <th class="no-export">Edit </th>
-                                        <th class="no-export">Delete </th>
+                                        <th>Right Captcha</th>
+                                        <th>Wrong Captcha</th>
+                                        <th>Total Captcha</th>
+                                        <th>Total Earning</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($captchaTypes as $key=>$value )
+                                    @foreach ($captcha as $key=>$value )
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td>{{ $value->type_name }}</td>
-
-                                        <td class="no-export">
-                                            <a href="{{ route('captcha-type.edit', $value->id) }}">
-                                                <button class="btn btn-warning btn-sm text-dark">
-                                                    <i class="far fa-edit"></i>
-                                                </button>
-                                            </a>
-                                        </td>
-
-                                        <td class="no-export">
-                                            <form action="{{ route('captcha-type.destroy', $value->id) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </form>
-                                        </td>
+                                        <td>{{ $value->citizen?->name }}</td>
+                                        @if($value->captcha_type_id == 1)
+                                        <td><span class="badge bg-success">Easy</span></td>
+                                        @elseif($value->captcha_type_id == 2)
+                                        <td><span class="badge bg-warning">Medium</span></td>
+                                        @elseif($value->captcha_type_id == 3)
+                                        <td><span class="badge bg-danger">Hard</span></td>
+                                        @endif
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
