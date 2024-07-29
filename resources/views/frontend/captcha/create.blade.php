@@ -33,7 +33,7 @@ Captcha  | Add
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <div class="d-flex">
-                                                    <img src="{{ captcha_src('default') }}" id="easy-captcha" style="height: 70px !important; width:491px !important; max-width: 90% !important;">&nbsp;&nbsp;
+                                                    <img src="{{ captcha_src('default') }}" id="easy-captcha" style="height: 48px !important; width:362px !important; max-width: 90% !important;">&nbsp;&nbsp;
                                                     <button type="button" class="btn btn-primary" onclick="refreshCaptcha('easy-captcha', 'default')"><i class="fa fa-refresh"></i></button>
                                                 </div>
                                                 <br>
@@ -61,7 +61,7 @@ Captcha  | Add
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <div class="d-flex">
-                                                    <img src="{{ captcha_src('medium') }}" id="medium-captcha" style="height: 70px !important; width:491px !important; max-width: 90% !important;">&nbsp;&nbsp;
+                                                    <img src="{{ captcha_src('medium') }}" id="medium-captcha" style="height: 48px !important; width:362px !important; max-width: 90% !important;">&nbsp;&nbsp;
                                                     <button type="button" class="btn btn-primary" onclick="refreshCaptcha('medium-captcha', 'medium')"><i class="fa fa-refresh"></i></button>
                                                 </div>
                                                 <br>
@@ -89,7 +89,7 @@ Captcha  | Add
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <div class="d-flex">
-                                                    <img src="{{ captcha_src('hard') }}" id="hard-captcha" style="height: 70px !important; width:491px !important; max-width: 90% !important;">&nbsp;&nbsp;
+                                                    <img src="{{ captcha_src('hard') }}" id="hard-captcha" style="height: 48px !important; width:362px !important; max-width: 90% !important;">&nbsp;&nbsp;
                                                     <button type="button" class="btn btn-primary" onclick="refreshCaptcha('hard-captcha', 'hard')"><i class="fa fa-refresh"></i></button>
                                                 </div>
                                                 <br>
