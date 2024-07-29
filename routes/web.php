@@ -74,6 +74,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:web', PreventBackHistor
     // ==== Manage Citizen
     Route::resource('citizen', CitizenController::class);
 
+    // ==== Manage Payment Request list with status
+    Route::get('payment-request-list/{status?}', [CitizensPaymentController::class, 'paymentRequestList'])->name('admin.payment-request-list');
+    Route::get('payment-request-list/view/{id?}/{status?}', [CitizensPaymentController::class, 'viewPaymentRequestList'])->name('admin.payment-request-list.view');
 });
 
 Route::group(['prefix' => 'citizen'],function(){

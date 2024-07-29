@@ -125,4 +125,23 @@ class CitizenPaymentController extends Controller
             return redirect()->back()->with('error','Something Went Wrong - '.$ex->getMessage());
         }
     }
+
+    // ==== Manage Payment Request list with status
+    public function paymentRequestList(int $status){
+
+        $query = CitizenPayment::with('citizen')->orderBy("id","desc")->whereNull('deleted_at')->where('transaction_status', $status);
+        $citizenPayment = $query->paginate(10);
+        return view('backend.citizenPayment.list', [
+            'citizenPayment' => $citizenPayment,
+            'status' => $status,
+        ]);
+    }
+
+    // ==== Manage Payment Request View with status
+    public function viewPaymentRequestList(){
+        $citizenPayment = CitizenPayment::with('citizen')->orderBy("id","desc")->whereNull('deleted_at')->get();
+
+        return view('backend.citizenPayment.view', ['citizenPayment' => $citizenPayment]);
+    }
+
 }

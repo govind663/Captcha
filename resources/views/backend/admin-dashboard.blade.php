@@ -30,7 +30,7 @@
                 <div class="col">
                     <h3 class="page-title">Dashboard</h3>
                     <ul class="breadcrumb">
-                        {{-- <li class="breadcrumb-item active">Home</li> --}}
+                        <li class="breadcrumb-item active">Home</li>
                     </ul>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                                 <i class="fas fa-users"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Citizen</div>
+                                <div class="dash-title text-dark">Total User</div>
                                 <div class="dash-counts text-dark">
                                     <p>{{ $totalCitizen }}</p>
                                 </div>
@@ -87,7 +87,7 @@
                                 <i class="fas fa-users"></i>
                             </span>
                             <div class="dash-count">
-                                <div class="dash-title text-dark">Total Citizen</div>
+                                <div class="dash-title text-dark">Total User</div>
                                 <div class="dash-counts text-dark">
                                     <p>{{ $totalCitizen }}</p>
                                 </div>

@@ -14,7 +14,7 @@
                 <li class="{{ ($currentRoute === 'admin.index') || ($currentRoute === 'admin.create') || ($currentRoute === 'admin.edit') ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}">
                         <i class="fe fe-user"></i>
-                        <span>Manage Admin</span>
+                        <span>Manage Sub Admin</span>
                     </a>
                 </li>
 
@@ -75,6 +75,25 @@
                     </a>
                 </li>
                 @endif
+
+                <li class="submenu {{ ($currentRoute === 'admin.payment-request-list/1') || ($currentRoute === 'admin.payment-request-list/2') || ($currentRoute === 'admin.payment-request-list/3') ? 'active' : '' }}">
+                    <a href="javascript:void(0);">
+                        <i class="fe fe-box"></i>
+                        <span>Payment Request</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul style="display: none;">
+                        <li class="">
+                            <a href="{{ route('admin.payment-request-list', ['status'=>1]) }}"><span>Pending</span></a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('admin.payment-request-list', ['status'=>2]) }}"><span>Success</span></a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('admin.payment-request-list', ['status'=>3]) }}"><span>Cancel</span></a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </div>

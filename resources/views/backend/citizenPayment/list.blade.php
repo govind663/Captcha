@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Sub Admin | List
+Payment Request | List
 @endsection
 
 @push('styles')
@@ -46,10 +46,16 @@ Sub Admin | List
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Manage Sub Admin</h3>
+                    <h3 class="page-title">Manage Payment Request</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">All Sub Admin List</li>
+                        @if($status == 1)
+                        <li class="breadcrumb-item active">All Pending List</li>
+                        @elseif($status == 2)
+                        <li class="breadcrumb-item active">All Success List</li>
+                        @elseif($status == 3)
+                        <li class="breadcrumb-item active">All Cancel List</li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -59,52 +65,69 @@ Sub Admin | List
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-body d-flex1">
-                        <div class="justify-content-start">
-                            <h5 class="card-title">All Sub Admin List</h5>
-                        </div>
-                        <div class="justify-content-end">
-                            <a href="{{ route('admin.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Sub Admin
-                            </a>
+                    <div class="card-body">
+                        <div class="col-10">
+                            @if($status == 1)
+                            <h5 class="card-title">All Pending List</h5>
+                            @elseif($status == 2)
+                            <h5 class="card-title">All Success List</h5>
+                            @elseif($status == 3)
+                            <h5 class="card-title">All Cancel List</h5>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
-
                         <div class="table-responsive">
-                            <table class="data-table-export1 table">
+                            <table class="data-table-export1 table table-nowrap table-responsive">
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Name</th>
-                                        <th>User Type</th>
-                                        <th>Email Id</th>
+                                        <th>Transaction ID</th>
+                                        <th>User Name</th>
+                                        <th>Requested Amount</th>
+                                        <th>Payment Date / Time</th>
+                                        <th>Payment Mode</th>
+                                        <th>Payment Status</th>
                                         <th class="no-export">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($employees as $key=>$value )
+                                    @foreach ($citizenPayment as $key=>$value )
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td>{{ $value->name }}</td>
-                                        @if($value->user_type == 2)
-                                        <td><span class="badge bg-success text-light">Admin</span></td>
+                                        <td>{{ $value->transaction_id }}</td>
+                                        <td>{{ $value->citizen?->name }}</td>
+                                        <td>{{ $value->request_amount }}</td>
+                                        <td>
+                                            {{ date('d-m-Y', strtotime($value->transaction_date)) }} /
+                                            {{ date('H:i A', strtotime($value->transaction_time)) }}
+                                        </td>
+
+                                        @if($value->payment_mode == 1)
+                                        <td><span class="badge bg-warning">Cash</span></td>
+                                        @elseif($value->payment_mode == 2)
+                                        <td><span class="badge bg-info">Cheque</span></td>
+                                        @elseif($value->payment_mode == 3)
+                                        <td><span class="badge bg-primary">Online Transfer</span></td>
+                                        @elseif($value->payment_mode == 4)
+                                        <td><span class="badge bg-warning">Google Pay</span></td>
+                                        @elseif($value->payment_mode == 5)
+                                        <td><span class="badge bg-danger">Phone Pay</span></td>
                                         @endif
 
-                                        <td>{{ $value->email }}</td>
-                                        <td class="no-export d-flex">
-                                            <a href="{{ route('admin.edit', $value->id) }}" class="btn btn-warning btn-sm text-dark">
-                                                <i class="far fa-edit me-2"></i>Edit
+
+                                        @if($value->transaction_status == 1)
+                                        <td><span class="badge bg-primary">Pending</span></td>
+                                        @elseif($value->transaction_status == 2)
+                                        <td><span class="badge bg-success">Paid</span></td>
+                                        @elseif($value->transaction_status == 3)
+                                        <td><span class="badge bg-danger">Cancelled</span></td>
+                                        @endif
+
+                                        <td class="no-export ">
+                                            <a href="" class="btn btn-warning btn-sm text-dark">
+                                                <i class="far fa-eye me-2"></i>View
                                             </a>
-                                            &nbsp;
-                                            <form action="{{ route('admin.destroy', $value->id) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">
-                                                    <i class="far fa-trash-alt me-2"></i>Delete
-                                                </button>
-                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

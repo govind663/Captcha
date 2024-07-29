@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-  Employee | Update
+Sub Admin | Update
 @endsection
 
 @push('styles')
@@ -20,7 +20,7 @@
 
                 <div class="page-header">
                     <div class="content-page-header">
-                        <h5>Edit Employee</h5>
+                        <h5>Edit Sub Admin</h5>
                     </div>
                 </div>
 
